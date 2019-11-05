@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
-    class Bullet : Player
+    class Bullet : Entity
     {
         private Vector2 targetCoords;
         /// <summary>
@@ -46,9 +46,19 @@ namespace Game1
         /// in the gameworld..
         /// </summary>
         /// <param name="other"></param>
-        public override void OnCollision(GameObject other)
+        public override void OnCollision(GameObject otherEntity)
         {
 
+        }
+
+        public override void Shoot()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Die()
+        {
+            throw new NotImplementedException();
         }
     }
 }

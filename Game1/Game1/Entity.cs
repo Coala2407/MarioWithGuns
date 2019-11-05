@@ -31,7 +31,7 @@ namespace Game1
         /// <summary>
         /// Runs on collision with another entity
         /// </summary>
-        public abstract void OnCollision();
+        public abstract void OnCollision(GameObject otherEntity);
 
         /// <summary>
         /// Removes entity
