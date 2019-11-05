@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
-    class Bullet : Player
+    class Bullet : Entity
     {
         private Vector2 targetCoords;
         /// <summary>
