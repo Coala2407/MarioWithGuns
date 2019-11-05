@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
-    class Bullet : GameObject
+    class Bullet : Player
     {
+        private Vector2 targetCoords;
         /// <summary>
         /// This is the constructor for the bullet.
         /// </summary>
@@ -51,6 +52,6 @@ namespace Game1
         }
     }
 }
-}
+
     
 
