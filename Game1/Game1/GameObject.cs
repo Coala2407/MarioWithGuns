@@ -16,11 +16,23 @@ namespace Game1
         //Constructor
 
         //Abstract
+        /// <summary>
+        /// Update method. Runs every frame
+        /// </summary>
+        /// <param name="gameTime"></param>
         public abstract void Update(GameTime gameTime);
 
+        /// <summary>
+        /// Used to load content
+        /// </summary>
+        /// <param name="content"></param>
         public abstract void LoadContent(ContentManager content);
 
         //Virtual
+        /// <summary>
+        /// Used to draw a sprite on the screen
+        /// </summary>
+        /// <param name="spriteBatch">Access spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             throw new NotImplementedException();
