@@ -12,7 +12,10 @@ namespace Game1
     public abstract class GameObject
     {
         //Fields
+        protected Texture2D sprite;
+        protected Texture2D[] sprites;
         protected Vector2 position;
+        protected byte drawLayer;
 
         //Constructor
 
