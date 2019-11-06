@@ -41,6 +41,8 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
+            
+
             throw new NotImplementedException();
         }
 

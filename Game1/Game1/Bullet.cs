@@ -38,8 +38,7 @@ namespace Game1
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-
-
+            
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
