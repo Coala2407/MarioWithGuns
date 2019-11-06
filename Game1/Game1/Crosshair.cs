@@ -24,6 +24,7 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            //Updates the current position of the mouse
             MouseState currentMouseState = Mouse.GetState();
             position = new Vector2(currentMouseState.X, currentMouseState.Y);
 
