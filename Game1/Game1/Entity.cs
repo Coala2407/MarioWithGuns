@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Game1
 {
-    abstract class Entity : GameObject
+   public abstract class Entity : GameObject
     {
         //Fields
         private Vector2 velocity;

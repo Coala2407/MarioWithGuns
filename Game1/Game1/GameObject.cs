@@ -5,7 +5,7 @@ using System;
 
 namespace Game1
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         //Fields
         protected Texture2D sprite;

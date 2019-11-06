@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Game1
 {
@@ -11,6 +12,14 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        //World fields
+        public static List<GameObject> GameObjectList = new List<GameObject>();
+        public static List<Entity> EntityList = new List<Entity>();
+        //Used to add to the other while game is running
+        public static List<GameObject> NewGameObjectList = new List<GameObject>();
+        public static List<Entity> NewEntityList = new List<Entity>();
+        
 
         public GameWorld()
         {
