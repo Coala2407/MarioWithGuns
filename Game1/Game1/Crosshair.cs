@@ -10,28 +10,28 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game1
 {
-   class Crosshair : GameObject
+    class Crosshair : GameObject
     {
-        public Texture2D MouseSprite;
-        public Vector2 pos;
+        public Crosshair()
+        {
+            drawLayer = 0.50f;
+        }
 
         public override void LoadContent(ContentManager content)
         {
-            MouseSprite = content.Load<Texture2D>("Corshair");
+            sprite = content.Load<Texture2D>("Corshair");
         }
 
         public override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            pos = new Vector2(currentMouseState.X, currentMouseState.Y);
-          
+            position = new Vector2(currentMouseState.X, currentMouseState.Y);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
-            spriteBatch.Draw(MouseSprite, pos, Color.White);
-            
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
 
     }

@@ -16,44 +16,79 @@ namespace Game1
         /// Interval between jumps (field of class Player, type: int)
         /// </summary>
         private float jumpCooldown;
-        private const float maxJumpTime = 2f;
+        private const float maxJumpTime = 1f;
         private float jumpTime;
         /// <summary>
         /// Sets the strength of gravity for the player (field of class Player, type: int)
         /// </summary>
-        private int gravity;
+        private float gravity;
 
         private float timer;
 
-        private float jumpSpeed;
+        private bool isJumping;
+        private bool wasJumping;
 
         public Player()
         {
             position = new Vector2(500, 300);
-            gravity = 50;
+            gravity = 0.5f;
             jumpCooldown = 1;
             moveSpeed = 500;
-            jumpSpeed = 100;
+            drawLayer = 0.0F;
         }
 
         /// <summary>
+        /// WIP
         /// Method used to perform a jump for the player (method of class Player, no inputs or outputs)
         /// </summary>
-        public void Jump(GameTime gameTime)
+        private float Jump(float velocityY, GameTime gameTime)
         {
-            Vector2 currentPostion = position;
+
             jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (jumpTime < maxJumpTime)
+            if (isJumping)
             {
-                velocity.Y -= 1;
+                //if (!wasJumping && position.Y == 300)
+                //{
+
+                //}
+                if (jumpTime < maxJumpTime)
+                {
+                    velocityY = -0.75f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, 0.33));
+                }
+                else
+                {
+                    jumpTime = 0.0f;
+                    timer = 0;
+                }
             }
+            else
+            {
+                jumpTime = 0.0f;
+            }
+            //wasJumping = isJumping;
+
+            return velocityY;
         }
-        
+
+        private void ApplyPhysics(GameTime gameTime)
+        {
+            HandleInput(gameTime);
+            if (position.Y < 300)
+            {
+                velocity.Y = gravity;
+            }
+
+            //Update y value for potential jumps
+            velocity.Y = Jump(velocity.Y, gameTime);
+
+            Move(gameTime);
+
+            isJumping = false;
+        }
 
         public override void Update(GameTime gameTime)
         {
-            HandleInput(gameTime);
-            Move(gameTime);
+            ApplyPhysics(gameTime);
         }
         /// <summary>
         /// Method to collect user input, used for movement and shooting
@@ -79,11 +114,9 @@ namespace Game1
             {
                 if (timer > jumpCooldown)
                 {
-                    Jump(gameTime);
-                    timer = 0;
+                    isJumping = true;
                 }
             }
-
         }
 
         /// <summary>

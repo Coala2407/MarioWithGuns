@@ -13,7 +13,7 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Crosshair cr = new Crosshair();
+
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
@@ -39,6 +39,7 @@ namespace Game1
         {
             // TODO: Add your initialization logic here
             EntityList.Add(new Player());
+            GameObjectList.Add(new Crosshair());
             base.Initialize();
         }
 
@@ -62,7 +63,6 @@ namespace Game1
             }
 
             // TODO: use this.Content to load your game content here
-            cr.LoadContent(Content);
         }
 
         /// <summary>
@@ -83,11 +83,14 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            foreach (GameObject go in GameObjectList)
+            {
+                go.Update(gameTime);
+            }
             foreach (Entity en in EntityList)
             {
                 en.Update(gameTime);
             }
-            cr.Update(gameTime);
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -100,7 +103,6 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            cr.Draw(spriteBatch);
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {
