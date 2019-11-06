@@ -11,10 +11,17 @@ namespace Game1
    public abstract class Entity : GameObject
     {
         //Fields
-        private Vector2 velocity;
-        private float moveSpeed;
-        private float shootCooldown;
-        private int health;
+        protected Vector2 velocity;
+        protected float moveSpeed;
+        protected float shootCooldown;
+        protected int health;
+
+        public Entity()
+        {
+            health = 100;
+            moveSpeed = 100;
+            shootCooldown = 0.33F;
+        }
 
         //From GameObject:
         public override void LoadContent(ContentManager content)
@@ -41,8 +48,14 @@ namespace Game1
         /// <summary>
         /// Move entity
         /// </summary>
-        public virtual void Move()
-        {}
+        public virtual void Move(GameTime gameTime)
+        {
+            //deltaTime based on gameTime
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //Moves the player based on velocity, speed, and deltaTime
+            position += ((velocity * moveSpeed) * deltaTime);
+        }
 
         /// <summary>
         /// Get/make a collision box for the entity

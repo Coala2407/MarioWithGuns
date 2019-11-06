@@ -11,7 +11,7 @@ namespace Game1
         protected Texture2D sprite;
         protected Texture2D[] sprites;
         protected Vector2 position;
-        protected byte drawLayer;
+        protected float drawLayer;
         protected Vector2 origin;
 
         //Constructor
@@ -36,7 +36,7 @@ namespace Game1
         /// <param name="spriteBatch">Access spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Crosshair cr = new Crosshair();
+
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
@@ -38,7 +38,8 @@ namespace Game1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            GameObjectList.Add(new Player());
+            EntityList.Add(new Player());
+            GameObjectList.Add(new Crosshair());
             base.Initialize();
         }
 
@@ -56,8 +57,12 @@ namespace Game1
                 go.LoadContent(Content);
             }
 
+            foreach (GameObject go in EntityList)
+            {
+                go.LoadContent(Content);
+            }
+
             // TODO: use this.Content to load your game content here
-            cr.LoadContent(Content);
         }
 
         /// <summary>
@@ -78,10 +83,15 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            cr.Update(gameTime);
+            foreach (GameObject go in GameObjectList)
+            {
+                go.Update(gameTime);
+            }
+            foreach (Entity en in EntityList)
+            {
+                en.Update(gameTime);
+            }
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -93,7 +103,6 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            cr.Draw(spriteBatch);
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {
@@ -101,10 +110,10 @@ namespace Game1
             }
 
             //Draw all entities on the list, maybe not needed
-            //foreach (Entity go in EntityList)
-            //{
-            //    go.Draw(spriteBatch);
-            //}
+            foreach (Entity en in EntityList)
+            {
+                en.Draw(spriteBatch);
+            }
             // TODO: Add your drawing code here
 
             spriteBatch.End();
