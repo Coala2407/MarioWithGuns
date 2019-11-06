@@ -43,6 +43,7 @@ namespace Game1
         /// </summary>
         private float Jump(float velocityY, GameTime gameTime)
         {
+            
 
             jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (isJumping)

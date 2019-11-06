@@ -81,27 +81,6 @@ namespace Game1
             return health;
         }
 
-        protected double CalculateAngle(int posX1, int posY1, int posX2, int posY2)
-        {
-            /*
-            //Position 1
-            int posX1 = ;
-            int posY1 = ;
 
-            //Position 2
-            int posX2 = ;
-            int posY2 = ;
-            */
-
-            //Angle deci (Radians)
-            double m = (posY2 - posY1) / (posX2 - posX1);
-
-            //Angle deci to degrees
-            double angleRad = Math.Atan(m);
-            double angleDeg = (180 / Math.PI) * angleRad;
-
-            //Returns the degree in double
-            return angleDeg;
-        }
     }
 }
