@@ -2,10 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game1
 {
@@ -16,18 +12,31 @@ namespace Game1
         protected Texture2D[] sprites;
         protected Vector2 position;
         protected byte drawLayer;
+        protected Vector2 origin;
 
         //Constructor
 
         //Abstract
+        /// <summary>
+        /// Update method. Runs every frame
+        /// </summary>
+        /// <param name="gameTime"></param>
         public abstract void Update(GameTime gameTime);
 
+        /// <summary>
+        /// Used to load content
+        /// </summary>
+        /// <param name="content"></param>
         public abstract void LoadContent(ContentManager content);
 
         //Virtual
+        /// <summary>
+        /// Used to draw a sprite on the screen
+        /// </summary>
+        /// <param name="spriteBatch">Access spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
         }
     }
 }

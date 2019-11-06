@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Game1
 {
@@ -13,6 +14,14 @@ namespace Game1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Crosshair cr = new Crosshair();
+
+        //World fields
+        public static List<GameObject> GameObjectList = new List<GameObject>();
+        public static List<Entity> EntityList = new List<Entity>();
+        //Used to add to the other while game is running
+        public static List<GameObject> NewGameObjectList = new List<GameObject>();
+        public static List<Entity> NewEntityList = new List<Entity>();
+
 
         public GameWorld()
         {
@@ -29,9 +38,7 @@ namespace Game1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-         
-
+            GameObjectList.Add(new Player());
             base.Initialize();
         }
 
@@ -43,6 +50,11 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            foreach (GameObject go in GameObjectList)
+            {
+                go.LoadContent(Content);
+            }
 
             // TODO: use this.Content to load your game content here
             cr.LoadContent(Content);
@@ -82,8 +94,20 @@ namespace Game1
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             cr.Draw(spriteBatch);
-            spriteBatch.End();
+            //Draw all gameobjects on the list
+            foreach (GameObject go in GameObjectList)
+            {
+                go.Draw(spriteBatch);
+            }
+
+            //Draw all entities on the list, maybe not needed
+            //foreach (Entity go in EntityList)
+            //{
+            //    go.Draw(spriteBatch);
+            //}
             // TODO: Add your drawing code here
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

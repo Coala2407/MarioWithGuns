@@ -41,11 +41,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Background.cs" />
+    <Compile Include="Bullet.cs" />
     <Compile Include="Crosshair.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -92,6 +99,8 @@
     <Content Include="bin\Windows\x86\Release\SharpDX.XInput.xml" />
     <Content Include="bin\Windows\x86\Release\SharpDX.xml" />
     <Content Include="Content\Corshair.png" />
+    <Content Include="Content\Cray.png" />
+    <Content Include="Content\KaliKula.png" />
     <Content Include="Icon.ico" />
     <Content Include="obj\x86\Debug\Game1.csproj.FileListAbsolute.txt" />
     <Content Include="obj\x86\Debug\Game1.exe" />
