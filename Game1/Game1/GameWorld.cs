@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Crosshair cr = new Crosshair();
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
@@ -60,6 +62,7 @@ namespace Game1
             }
 
             // TODO: use this.Content to load your game content here
+            cr.LoadContent(Content);
         }
 
         /// <summary>
@@ -84,8 +87,8 @@ namespace Game1
             {
                 en.Update(gameTime);
             }
+            cr.Update(gameTime);
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -97,7 +100,7 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
+            cr.Draw(spriteBatch);
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {

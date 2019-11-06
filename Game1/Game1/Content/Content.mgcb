@@ -25,6 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:Corshair.png
 
+
 #begin Cray.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,4 +49,5 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:KaliKula.png
+
 
