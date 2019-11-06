@@ -8,8 +8,11 @@ namespace Game1
 {
     class Platform
     {
+        /// <summary>
+        /// Width of the platform (field of class Platform)
+        /// </summary>
         private int width;
 
-
+        //No methods
     }
 }
