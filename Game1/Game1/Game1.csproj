@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Crosshair.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Program.cs" />
@@ -54,11 +55,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Windows\x86\Debug\Game1.exe" />
+    <Content Include="bin\Windows\x86\Debug\Game1.pdb" />
+    <Content Include="bin\Windows\x86\Debug\MonoGame.Framework.dll" />
+    <Content Include="bin\Windows\x86\Debug\MonoGame.Framework.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.Direct2D1.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.Direct2D1.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.Direct3D11.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.Direct3D11.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.DXGI.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.DXGI.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.XAudio2.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.XAudio2.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.XInput.dll" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.XInput.xml" />
+    <Content Include="bin\Windows\x86\Debug\SharpDX.xml" />
+    <Content Include="bin\Windows\x86\Release\Game1.exe" />
+    <Content Include="bin\Windows\x86\Release\Game1.pdb" />
+    <Content Include="bin\Windows\x86\Release\MonoGame.Framework.dll" />
+    <Content Include="bin\Windows\x86\Release\MonoGame.Framework.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.Direct2D1.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.Direct2D1.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.Direct3D11.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.Direct3D11.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.DXGI.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.DXGI.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.MediaFoundation.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.MediaFoundation.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.XAudio2.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.XAudio2.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.XInput.dll" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.XInput.xml" />
+    <Content Include="bin\Windows\x86\Release\SharpDX.xml" />
+    <Content Include="Content\Corshair.png" />
     <Content Include="Icon.ico" />
+    <Content Include="obj\x86\Debug\Game1.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\Game1.exe" />
+    <Content Include="obj\x86\Debug\Game1.pdb" />
+    <Content Include="obj\x86\Release\Game1.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Release\Game1.exe" />
+    <Content Include="obj\x86\Release\Game1.pdb" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="bin\Windows\x86\Debug\Content\Corshair.xnb" />
+    <None Include="bin\Windows\x86\Release\Content\Corshair.xnb" />
+    <None Include="Content\bin\Windows\Content\Corshair.xnb" />
+    <None Include="Content\bin\Windows\Corshair.xnb" />
+    <None Include="Content\obj\Windows\.mgcontent" />
+    <None Include="Content\obj\Windows\.mgstats" />
+    <None Include="Content\obj\Windows\Content\.mgcontent" />
+    <None Include="Content\obj\Windows\Content\.mgstats" />
+    <None Include="Content\obj\Windows\Content\Corshair.mgcontent" />
+    <None Include="Content\obj\Windows\Corshair.mgcontent" />
+    <None Include="obj\x86\Debug\build.force" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\Game1.csproj.CopyComplete" />
+    <None Include="obj\x86\Debug\Game1.csprojAssemblyReference.cache" />
+    <None Include="obj\x86\Release\Game1.csproj.CopyComplete" />
+    <None Include="obj\x86\Release\Game1.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Windows\Content\" />
+    <Folder Include="obj\Windows\Content\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
+    <Folder Include="obj\x86\Release\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
