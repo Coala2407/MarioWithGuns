@@ -20,25 +20,25 @@ namespace Game1
         public Bullet(Texture2D sprite, Vector2 position)
         {
 
-            
-            
+
+
         }
 
         /// <summary>
         /// WIP >:(
         /// </summary>
-        /// <param name="Content"></param>
-            public override void LoadContent(ContentManager Content)
-            {
+        /// <param name="content"></param>
+        public override void LoadContent(ContentManager content)
+        {
 
-            }
+        }
         /// <summary>
         /// This is where the movment and collision is calculated and used..
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            
+
 
         }
         /// <summary>
@@ -63,5 +63,5 @@ namespace Game1
     }
 }
 
-    
+
 

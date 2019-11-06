@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
@@ -34,19 +36,38 @@ namespace Game1
 
         }
 
+        /// <summary>
+        /// Spawn bullet and shoot
+        /// </summary>
         public override void Shoot()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Runs on collision with another entity
+        /// </summary>
+        /// <param name="otherEntity"></param>
         public override void OnCollision(GameObject otherEntity)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Player dies
+        /// </summary>
         public override void Die()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Like content, like sprites, for the player
+        /// </summary>
+        /// <param name="content"></param>
+        public override void LoadContent(ContentManager content)
+        {
+            sprite = content.Load<Texture2D>("KaliKula");
         }
     }
 }

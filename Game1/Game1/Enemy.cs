@@ -18,5 +18,30 @@ namespace Game1
         {
 
         }
+
+        /// <summary>
+        /// Spawn bullet and shoot
+        /// </summary>
+        public override void Shoot()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Runs on collision with another entity
+        /// </summary>
+        /// <param name="otherEntity"></param>
+        public override void OnCollision(GameObject otherEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Player dies
+        /// </summary>
+        public override void Die()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

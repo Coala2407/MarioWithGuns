@@ -62,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Corshair.png" />
+    <Content Include="Content\Cray.png" />
+    <Content Include="Content\KaliKula.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
