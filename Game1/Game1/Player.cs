@@ -33,5 +33,20 @@ namespace Game1
         {
 
         }
+
+        public override void Shoot()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnCollision(GameObject otherEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Die()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
