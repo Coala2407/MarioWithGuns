@@ -22,6 +22,7 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            //Updates the current position of the mouse
             MouseState currentMouseState = Mouse.GetState();
             pos = new Vector2(currentMouseState.X, currentMouseState.Y);
           
@@ -29,7 +30,7 @@ namespace Game1
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+            //Loads the position info of the mouse and places the sprite on top of it to make a functional crosshair
             spriteBatch.Draw(MouseSprite, pos, Color.White);
             
         }
