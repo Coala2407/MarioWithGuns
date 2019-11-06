@@ -12,6 +12,7 @@ namespace Game1
     class Bullet : Entity
     {
         private Vector2 targetCoords;
+        private float speed;
         /// <summary>
         /// This is the constructor for the bullet.
         /// </summary>
@@ -20,7 +21,8 @@ namespace Game1
         public Bullet(Texture2D sprite, Vector2 position)
         {
 
-
+            this.sprite = sprite;
+            this.position = position;
 
         }
 
@@ -38,6 +40,8 @@ namespace Game1
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            speed = 500;
+            
 
 
         }
