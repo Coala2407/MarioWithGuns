@@ -44,7 +44,8 @@ namespace Game1
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+            Rectangle test = new Rectangle((int)position.X, (int)position.Y, width, 50);
+            spriteBatch.Draw(sprite, test, null, Color.Red, 0, origin, SpriteEffects.None, drawLayer);
         }
     }
 }
