@@ -22,7 +22,7 @@ namespace Game1
         {
 
             this.sprite = sprite;
-            this.position = position;
+            this.position = Player.PlayerPosition;
 
         }
 
@@ -32,7 +32,7 @@ namespace Game1
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-
+            sprite = content.Load<Texture2D>("Bullet");
         }
         /// <summary>
         /// This is where the movment and collision is calculated and used..
@@ -60,6 +60,27 @@ namespace Game1
         public override void Die()
         {
             throw new NotImplementedException();
+        }
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+
+            //HUSK AT KOORDINATSYSTEMET ER PÅ HOVEDET!
+            float newAngle = 0;
+            float slope = 0;
+            double slopeV;
+            double angleDegrees;
+            double angleRadians;
+            CalculateAngle(***vector2player***, ***vector2mouse***, out slopeV, out angleDegrees, out angleRadians);
+            float angleRadiansF = (float)angleRadians;
+            slope = (float)slopeV;
+            newAngle = (float)angleDegrees;
+
+            origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+
+
+
+
+            spriteBatch.Draw(sprite, position, null, Color.White, angleRadiansF, origin, 1, SpriteEffects.None, drawLayer);
         }
     }
 }

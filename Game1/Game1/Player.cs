@@ -32,13 +32,18 @@ namespace Game1
         private bool wasJumping;
 
         private bool IsOnGround;
+        float elapsed;
+
+        //Player position
+        public static Vector2 PlayerPosition;
 
         public Player()
         {
             position = new Vector2(500, 300);
-            gravity = .75f;
+            gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.0F;
+            PlayerPosition = position;
         }
 
         /// <summary>
@@ -80,17 +85,21 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
+            elapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             //Get inputs
             HandleInput(gameTime);
 
             //Temp gravity, replace with an isOnGround method?
             if (position.Y < 300)
             {
-                velocity.Y = gravity;
+                //Acceleration?
+                velocity.Y += gravity * elapsed;
             }
-            if (position.Y > 300)
+            else
             {
                 position.Y = 300;
+                elapsed = 0f;
             }
 
             //Update y velocity value for potential jumps
@@ -106,6 +115,8 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             ApplyPhysics(gameTime);
+            //Update player position
+            PlayerPosition = position;
         }
         /// <summary>
         /// Method to collect user input, used for movement and shooting
