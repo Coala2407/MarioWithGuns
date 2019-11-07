@@ -70,7 +70,10 @@ namespace Game1
             double slopeV;
             double angleDegrees;
             double angleRadians;
-            CalculateAngle(***vector2player***, ***vector2mouse***, out slopeV, out angleDegrees, out angleRadians);
+            int xPlayer = (int)Player.PlayerPosition.X;
+            int yPlayer = (int)Player.PlayerPosition.Y;
+
+            CalculateAngle(xPlayer, yPlayer, 50, 50, out slopeV, out angleDegrees, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
             newAngle = (float)angleDegrees;
