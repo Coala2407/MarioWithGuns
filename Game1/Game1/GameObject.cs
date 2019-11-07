@@ -18,20 +18,9 @@ namespace Game1
         //Constructor
 
 
-
+        /*
         protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleDeg, out double angleRad)
         {
-            /*
-            //Position 1
-            int posX1 = ;
-            int posY1 = ;
-
-            //Position 2
-            int posX2 = ;
-            int posY2 = ;
-            */
-
-            //
             double posX1D = (double)posX1;
             double posX2D = (double)posX2;
             double posY1D = (double)posY1;
@@ -65,36 +54,11 @@ namespace Game1
             {
                 rad = 3.1415926536;
             }
-            /*
-            else if (posX2 > posX1 && posY2 < posY1)
-            {
-                //OK
-                //quarter = "Top Right +-";
-                quad = 90;
-                rad = 0;
-            }
-            
-            else if ((posX2 < posX1 && posY2 > posY1))
-            {
-                //OK
-                //quarter = "Bottom Left -+";
-                quad = 180;
-                rad = 3.1415926536;
-            }
-            
-            else
-            {
-                //OK
-                //quarter = "Top Left --";
-                quad = 270;
-                rad = 3.1415926536;
-            }
-            */
             angleRad = angleRad + rad;
             //Returns the degree in double
             angleDeg = ((180 / Math.PI) * angleRad) + quad;
         }
-
+        */
         //Abstract
         /// <summary>
         /// Update method. Runs every frame
@@ -130,6 +94,9 @@ namespace Game1
 
             
             */
+
+
+
 
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }

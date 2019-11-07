@@ -14,6 +14,7 @@ namespace Game1
     {
         private Vector2 targetCoords;
         private float speed;
+        private Vector2 crosshairPosition;
         /// <summary>
         /// This is the constructor for the bullet.
         /// </summary>
@@ -27,13 +28,54 @@ namespace Game1
 
         }
 
+        protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleDeg, out double angleRad)
+        {
+            double posX1D = (double)posX1;
+            double posX2D = (double)posX2;
+            double posY1D = (double)posY1;
+            double posY2D = (double)posY2;
+
+
+            if (posX1 != posX2 && posY1 != posY2 || (posY2 - posY1 != 0) || (posX2 - posX1) != 0)
+            {
+                m = (posY2D - posY1D) / (posX2D - posX1D);
+            }
+            else
+            {
+                m = 0;
+            }
+
+            //Angle deci to degrees
+            angleRad = Math.Atan(m);
+
+            //string quarter = "";
+            int quad = 0;
+            double rad = 0;
+
+            //Calculate quadrant in correlation to player point
+            if ((posX2 > posX1 && posY2 > posY1) || (posX2 > posX1 && posY2 < posY1))
+            {
+                //OK
+                //quarter = "Bottom Right ++";
+                rad = 0;
+            }
+            else
+            {
+                rad = 3.1415926536;
+            }
+            angleRad = angleRad + rad;
+            //Returns the degree in double
+            angleDeg = ((180 / Math.PI) * angleRad) + quad;
+        }
+
         /// <summary>
         /// WIP >:(
         /// </summary>
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Bullet");
+            sprite = content.Load<Texture2D>("KaliKula");
+            //sprite = content.Load<Texture2D>("Bullet");
         }
         /// <summary>
         /// This is where the movment and collision is calculated and used..
@@ -70,7 +112,7 @@ namespace Game1
 
             if (state.LeftButton == ButtonState.Pressed)
             {
-                position = new Vector2(state.X, state.Y);
+                crosshairPosition = new Vector2(state.X, state.Y);
             }
         }
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -85,7 +127,10 @@ namespace Game1
             int xPlayer = (int)Player.PlayerPosition.X;
             int yPlayer = (int)Player.PlayerPosition.Y;
 
-            CalculateAngle(xPlayer, yPlayer, 50, 50, out slopeV, out angleDegrees, out angleRadians);
+            int xCrosshair = (int)crosshairPosition.X;
+            int yCrosshair = (int)crosshairPosition.Y;
+
+            CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleDegrees, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
             newAngle = (float)angleDegrees;
@@ -95,7 +140,7 @@ namespace Game1
 
 
 
-            spriteBatch.Draw(sprite, position, null, Color.White, angleRadiansF, origin, 1, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(sprite, position, null, Color.White, angleRadiansF, origin, 1, SpriteEffects.None, 10f);
         }
     }
 }
