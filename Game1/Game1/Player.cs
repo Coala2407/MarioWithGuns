@@ -32,11 +32,17 @@ namespace Game1
         private bool wasJumping;
 
         private bool IsOnGround;
+        float elapsed;
+
+        public Vector2 PlayerPosition
+        {
+            get { return position; }
+        }
 
         public Player()
         {
             position = new Vector2(500, 300);
-            gravity = .75f;
+            gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.0F;
         }
@@ -80,17 +86,21 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
+            elapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             //Get inputs
             HandleInput(gameTime);
 
             //Temp gravity, replace with an isOnGround method?
             if (position.Y < 300)
             {
-                velocity.Y = gravity;
+                //Acceleration?
+                velocity.Y += gravity * elapsed;
             }
-            if (position.Y > 300)
+            else
             {
                 position.Y = 300;
+                elapsed = 0f;
             }
 
             //Update y velocity value for potential jumps
