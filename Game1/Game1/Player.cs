@@ -31,6 +31,8 @@ namespace Game1
         /// </summary>
         private bool wasJumping;
 
+        private bool IsOnGround;
+
         public Player()
         {
             position = new Vector2(500, 300);
