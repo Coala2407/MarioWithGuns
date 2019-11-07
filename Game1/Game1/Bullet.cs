@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game1
 {
@@ -60,6 +61,17 @@ namespace Game1
         public override void Die()
         {
             throw new NotImplementedException();
+        }
+
+        //Reads the current position of the Crosshair
+        private void HandleInput(GameTime gameTime)
+        {
+            MouseState state = Mouse.GetState();
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                position = new Vector2(state.X, state.Y);
+            }
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
