@@ -114,14 +114,14 @@ namespace Game1
         /// <param name="spriteBatch">Access spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+            /*
             //HUSK AT KOORDINATSYSTEMET ER PÅ HOVEDET!
             float newAngle = 0;
             float slope = 0;
             double slopeV;
             double angleDegrees;
             double angleRadians;
-            CalculateAngle(0, 0, 50, 50, out slopeV, out angleDegrees, out angleRadians);
+            CalculateAngle(0, 0, 0, 0, out slopeV, out angleDegrees, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
             newAngle = (float)angleDegrees;
@@ -129,9 +129,9 @@ namespace Game1
             origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
             
-            
+            */
 
-            spriteBatch.Draw(sprite, position, null, Color.White, angleRadiansF, origin, 1, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
     }
 }
