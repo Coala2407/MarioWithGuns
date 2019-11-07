@@ -31,7 +31,7 @@ namespace Game1
         public Player()
         {
             position = new Vector2(500, 300);
-            gravity = 0.5f;
+            gravity = 1f;
             jumpCooldown = 1;
             moveSpeed = 500;
             drawLayer = 0.0F;
@@ -43,19 +43,19 @@ namespace Game1
         /// </summary>
         private float Jump(float velocityY, GameTime gameTime)
         {
-            
-
-            jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (isJumping)
             {
-                //if (!wasJumping && position.Y == 300)
-                //{
+                //Replace postion == 300 with isOnGround method?
+                if ((!wasJumping && position.Y == 300) || jumpTime > 0.0f)
+                {
+                    jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
 
-                //}
-                if (jumpTime < maxJumpTime)
+                if (0.0f < jumpTime && jumpTime <= maxJumpTime)
                 {
                     velocityY = -0.75f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, 0.33));
                 }
+
                 else
                 {
                     jumpTime = 0.0f;
@@ -66,7 +66,8 @@ namespace Game1
             {
                 jumpTime = 0.0f;
             }
-            //wasJumping = isJumping;
+
+            wasJumping = isJumping;
 
             return velocityY;
         }
@@ -77,6 +78,10 @@ namespace Game1
             if (position.Y < 300)
             {
                 velocity.Y = gravity;
+            }
+            if (position.Y > 300)
+            {
+                position.Y = 300;
             }
 
             //Update y value for potential jumps
@@ -90,6 +95,8 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             ApplyPhysics(gameTime);
+
+            isJumping = false;
         }
         /// <summary>
         /// Method to collect user input, used for movement and shooting
@@ -113,10 +120,10 @@ namespace Game1
             }
             if (keyState.IsKeyDown(Keys.W))
             {
-                if (timer > jumpCooldown)
-                {
+                //if (timer > jumpCooldown)
+                //{
                     isJumping = true;
-                }
+                //}
             }
         }
 
@@ -125,7 +132,7 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            
+
 
             throw new NotImplementedException();
         }
