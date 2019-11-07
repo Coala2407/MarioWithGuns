@@ -16,16 +16,20 @@ namespace Game1
         /// Interval between jumps (field of class Player, type: int)
         /// </summary>
         private float jumpCooldown;
-        private const float maxJumpTime = 1f;
+        private const float maxJumpTime = .5f;
         private float jumpTime;
         /// <summary>
         /// Sets the strength of gravity for the player (field of class Player, type: int)
         /// </summary>
         private float gravity;
 
-        private float timer;
-
+        /// <summary>
+        /// Set to true when the player holds down the jump key
+        /// </summary>
         private bool isJumping;
+        /// <summary>
+        /// Set to true when the player has just jumped. Forces the player to press the jump key again
+        /// </summary>
         private bool wasJumping;
 
         public Player()
@@ -46,22 +50,24 @@ namespace Game1
             if (isJumping)
             {
                 //Replace postion == 300 with isOnGround method?
+                //Starts jump timer to allow jumps
                 if ((!wasJumping && position.Y == 300) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
 
-                if (0.0f < jumpTime && jumpTime <= maxJumpTime)
+                //Jump. Stay within max jump time. Jump physics below
+                if (jumpTime > 0.0f && jumpTime <= maxJumpTime)
                 {
-                    velocityY = -0.75f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, 0.33));
+                    velocityY = -2f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, .33f));
                 }
-
+                //Reached the top of jump.
                 else
                 {
                     jumpTime = 0.0f;
-                    timer = 0;
                 }
             }
+            //Isn't jumping
             else
             {
                 jumpTime = 0.0f;
@@ -74,7 +80,10 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
+            //Get inputs
             HandleInput(gameTime);
+
+            //Temp gravity, replace with an isOnGround method?
             if (position.Y < 300)
             {
                 velocity.Y = gravity;
@@ -84,19 +93,19 @@ namespace Game1
                 position.Y = 300;
             }
 
-            //Update y value for potential jumps
+            //Update y velocity value for potential jumps
             velocity.Y = Jump(velocity.Y, gameTime);
 
+            //Move
             Move(gameTime);
 
+            //Reset jumps
             isJumping = false;
         }
 
         public override void Update(GameTime gameTime)
         {
             ApplyPhysics(gameTime);
-
-            isJumping = false;
         }
         /// <summary>
         /// Method to collect user input, used for movement and shooting
@@ -104,8 +113,6 @@ namespace Game1
         /// <param name="gameTime"></param>
         private void HandleInput(GameTime gameTime)
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             //Stop moving when you stop pressing a key
             velocity = Vector2.Zero;
 
@@ -120,10 +127,8 @@ namespace Game1
             }
             if (keyState.IsKeyDown(Keys.W))
             {
-                //if (timer > jumpCooldown)
-                //{
-                    isJumping = true;
-                //}
+                //Jump
+                isJumping = true;
             }
         }
 
