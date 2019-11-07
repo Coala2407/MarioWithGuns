@@ -32,6 +32,7 @@ namespace Game1
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
+            sprite = content.Load<Texture2D>("Bullet");
         }
         /// <summary>
         /// This is where the movment and collision is calculated and used..
@@ -69,7 +70,7 @@ namespace Game1
             double slopeV;
             double angleDegrees;
             double angleRadians;
-            CalculateAngle(0, 0, 0, 0, out slopeV, out angleDegrees, out angleRadians);
+            CalculateAngle(***vector2player***, ***vector2mouse***, out slopeV, out angleDegrees, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
             newAngle = (float)angleDegrees;
