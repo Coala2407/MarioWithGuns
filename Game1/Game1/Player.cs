@@ -34,10 +34,8 @@ namespace Game1
         private bool IsOnGround;
         float elapsed;
 
-        public Vector2 PlayerPosition
-        {
-            get { return position; }
-        }
+        //Player position
+        public static Vector2 PlayerPosition;
 
         public Player()
         {
@@ -45,6 +43,7 @@ namespace Game1
             gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.0F;
+            PlayerPosition = position;
         }
 
         /// <summary>
@@ -116,6 +115,8 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             ApplyPhysics(gameTime);
+            //Update player position
+            PlayerPosition = position;
         }
         /// <summary>
         /// Method to collect user input, used for movement and shooting

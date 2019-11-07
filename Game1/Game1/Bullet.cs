@@ -22,7 +22,7 @@ namespace Game1
         {
 
             this.sprite = sprite;
-            this.position = position;
+            this.position = Player.PlayerPosition;
 
         }
 
@@ -32,7 +32,6 @@ namespace Game1
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-
         }
         /// <summary>
         /// This is where the movment and collision is calculated and used..
