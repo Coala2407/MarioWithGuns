@@ -15,7 +15,6 @@ namespace Game1
         /// <summary>
         /// Interval between jumps (field of class Player, type: int)
         /// </summary>
-        private float jumpCooldown;
         private const float maxJumpTime = .5f;
         private float jumpTime;
         /// <summary>
@@ -35,8 +34,7 @@ namespace Game1
         public Player()
         {
             position = new Vector2(500, 300);
-            gravity = 1f;
-            jumpCooldown = 1;
+            gravity = .75f;
             moveSpeed = 500;
             drawLayer = 0.0F;
         }

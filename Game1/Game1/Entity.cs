@@ -64,7 +64,7 @@ namespace Game1
         {
             get
             {
-                return new Rectangle();
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
             }
         }
 

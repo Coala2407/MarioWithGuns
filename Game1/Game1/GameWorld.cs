@@ -22,6 +22,25 @@ namespace Game1
         public static List<GameObject> NewGameObjectList = new List<GameObject>();
         public static List<Entity> NewEntityList = new List<Entity>();
 
+        //Methods
+        //Debug hitboxes
+#if DEBUG
+        Texture2D collisionTexture;
+        private void DrawCollisionBox(Entity en)
+        {
+            Rectangle collisionBox = en.GetCollisionBox;
+            Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+
+            spriteBatch.Draw(collisionTexture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+        }
+#endif
+
 
         public GameWorld()
         {
@@ -61,6 +80,11 @@ namespace Game1
             {
                 go.LoadContent(Content);
             }
+
+            //Load Debug hitboxes
+#if DEBUG
+            collisionTexture = Content.Load<Texture2D>("whitepixel");
+#endif
 
             // TODO: use this.Content to load your game content here
         }
@@ -113,6 +137,9 @@ namespace Game1
             foreach (Entity en in EntityList)
             {
                 en.Draw(spriteBatch);
+#if DEBUG
+                DrawCollisionBox(en);
+#endif
             }
             // TODO: Add your drawing code here
 
