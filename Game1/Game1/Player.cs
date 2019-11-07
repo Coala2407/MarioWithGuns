@@ -130,6 +130,8 @@ namespace Game1
                 //Jump
                 isJumping = true;
             }
+
+          
         }
 
         /// <summary>
