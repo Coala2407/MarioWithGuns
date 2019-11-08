@@ -22,6 +22,7 @@ namespace Game1
         /// </summary>
         private float gravity;
         private float timeFalling;
+        private Texture2D bulletSprite;
 
         /// <summary>
         /// Set to true when the player holds down the jump key
@@ -36,6 +37,7 @@ namespace Game1
 
         //Player position
         public static Vector2 PlayerPosition;
+        public static Vector2 CrosshairPosition;
 
         public Player()
         {
@@ -148,6 +150,16 @@ namespace Game1
                 isJumping = true;
             }
 
+            MouseState state = Mouse.GetState();
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
+                position.X = position.X + 3;
+                position.Y = position.Y + 3;
+                CrosshairPosition = position;
+                GameWorld.Instantiate(new Bullet(bulletSprite, position));
+            }
 
         }
 

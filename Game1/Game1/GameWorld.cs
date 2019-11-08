@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace Game1
 {
@@ -76,6 +75,11 @@ namespace Game1
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
+        }
+
+        public static void Instantiate(GameObject g)
+        {
+            NewGameObjectList.Add(g);
         }
 
         /// <summary>

@@ -12,9 +12,6 @@ namespace Game1
 {
     class Crosshair : GameObject
     {
-
-        public static Vector2 CrosshairPosition;
-
         public Crosshair()
         {
             drawLayer = 0.50f;
@@ -36,16 +33,6 @@ namespace Game1
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
-        }
-
-        private void HandleInput(GameTime gameTime)
-        {
-            MouseState state = Mouse.GetState();
-
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                CrosshairPosition = position;
-            }
         }
     }
 }
