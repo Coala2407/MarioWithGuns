@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Game1
 {
-    public class Camera
+    public class Camera : GameObject
     {
 
         public Vector2 Position
@@ -24,8 +25,9 @@ namespace Game1
         {
             this.level = level;
             ScrollingSpeed = 100;
+            position = Player.PlayerPosition;
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float previousPosX = position.X;
@@ -50,6 +52,10 @@ namespace Game1
 
             return Matrix.CreateTranslation(new Vector3(position, 0));
 
+        }
+        public override void LoadContent(ContentManager content)
+        {
+            
         }
     }
 }

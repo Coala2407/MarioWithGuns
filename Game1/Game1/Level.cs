@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
-    public class Level
+    public class Level : GameObject
     {
         private Player player;
         public Background[] backgroundLayers;
@@ -24,7 +25,7 @@ namespace Game1
             backgroundLayers[0] = new Background()
             {
 
-                Texture = game.Content.Load<Texture2D>(""),
+                Texture = game.Content.Load<Texture2D>("Kalikula"),
                 ScrollingSpeed = 0.1f,
                 OffsetY = 300
 
@@ -32,7 +33,7 @@ namespace Game1
             backgroundLayers[1] = new Background()
             {
 
-                Texture = game.Content.Load<Texture2D>(""),
+                Texture = game.Content.Load<Texture2D>("Kalikula"),
                 ScrollingSpeed = 0.2f,
                 OffsetY = 700
 
@@ -40,7 +41,7 @@ namespace Game1
             backgroundLayers[2] = new Background()
             {
 
-                Texture = game.Content.Load<Texture2D>(""),
+                Texture = game.Content.Load<Texture2D>("Kalikula"),
                 ScrollingSpeed = 0.4f,
                 OffsetY = 800
 
@@ -48,7 +49,7 @@ namespace Game1
             backgroundLayers[3] = new Background()
             {
 
-                Texture = game.Content.Load<Texture2D>(""),
+                Texture = game.Content.Load<Texture2D>("Kalikula"),
                 ScrollingSpeed = 0.8f,
                 OffsetY = 900
 
@@ -57,11 +58,16 @@ namespace Game1
 
             Camera = new Camera(this);
         }
-        public void Update(GameTime gameTime)
+
+        public Level()
+        {
+        }
+
+        public override void Update(GameTime gameTime)
         {
 
-            player.Update(gameTime);
-            Camera.Update(gameTime);
+            
+            
 
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -82,6 +88,10 @@ namespace Game1
                     }
                 }
             }
+        }
+        public override void LoadContent(ContentManager content)
+        {
+            
         }
     }
 }
