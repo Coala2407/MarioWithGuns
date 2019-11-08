@@ -12,6 +12,9 @@ namespace Game1
 {
     class Crosshair : GameObject
     {
+
+        public static Vector2 CrosshairPosition;
+
         public Crosshair()
         {
             drawLayer = 0.50f;
@@ -41,10 +44,8 @@ namespace Game1
 
             if (state.LeftButton == ButtonState.Pressed)
             {
-                position = new Vector2(state.X, state.Y);
+                CrosshairPosition = position;
             }
         }
-
-
     }
 }

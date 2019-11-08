@@ -14,21 +14,21 @@ namespace Game1
     {
         private Vector2 targetCoords;
         private float speed;
-        private Vector2 crosshairPosition;
-        /// <summary>
-        /// This is the constructor for the bullet.
-        /// </summary>
-        /// <param name="sprite"></param>
-        /// <param name="position"></param>
+        private Vector2 movement = Crosshair.CrosshairPosition - Player.PlayerPosition;
+        private Vector2 velocity;
+
+        //private Vector2 movement;
+
         public Bullet(Texture2D sprite, Vector2 position)
         {
-
+            this.speed = speed;
             this.sprite = sprite;
             this.position = Player.PlayerPosition;
-
+            this.targetCoords = Crosshair.CrosshairPosition;
+            origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
 
-        protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleDeg, out double angleRad)
+        protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleRad)
         {
             double posX1D = (double)posX1;
             double posX2D = (double)posX2;
@@ -49,7 +49,7 @@ namespace Game1
             angleRad = Math.Atan(m);
 
             //string quarter = "";
-            int quad = 0;
+            //double quad = 0;
             double rad = 0;
 
             //Calculate quadrant in correlation to player point
@@ -65,7 +65,7 @@ namespace Game1
             }
             angleRad = angleRad + rad;
             //Returns the degree in double
-            angleDeg = ((180 / Math.PI) * angleRad) + quad;
+            //angleDeg = ((180 / Math.PI) * angleRad) + quad;
         }
 
         /// <summary>
@@ -84,6 +84,10 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             speed = 500;
+
+            
+
+            Crosshair.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;       
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
@@ -97,7 +101,13 @@ namespace Game1
 
         public override void Shoot()
         {
-            throw new NotImplementedException();
+            /*
+            movement = Crosshair.CrosshairPosition - Player.PlayerPosition;
+            */
+            if (movement != Vector2.Zero)
+            {
+                movement.Normalize();
+            }
         }
 
         public override void Die()
@@ -105,42 +115,37 @@ namespace Game1
             throw new NotImplementedException();
         }
 
-        //Reads the current position of the Crosshair
-        private void HandleInput(GameTime gameTime)
-        {
-            MouseState state = Mouse.GetState();
 
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                crosshairPosition = new Vector2(state.X, state.Y);
-            }
-        }
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-
+            
             //HUSK AT KOORDINATSYSTEMET ER PÅ HOVEDET!
-            float newAngle = 0;
+            //float newAngle = 0;
             float slope = 0;
             double slopeV;
-            double angleDegrees;
+            //double angleDegrees;
             double angleRadians;
             int xPlayer = (int)Player.PlayerPosition.X;
             int yPlayer = (int)Player.PlayerPosition.Y;
 
-            int xCrosshair = (int)crosshairPosition.X;
-            int yCrosshair = (int)crosshairPosition.Y;
+            int xCrosshair = (int)targetCoords.X;
+            int yCrosshair = (int)targetCoords.Y;
 
-            CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleDegrees, out angleRadians);
+            CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
-            newAngle = (float)angleDegrees;
+            //newAngle = (float)angleDegrees;
+            
+            
 
-            origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            
 
 
 
 
-            spriteBatch.Draw(sprite, position, null, Color.White, angleRadiansF, origin, 1, SpriteEffects.None, 10f);
+
+
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
         }
     }
 }
