@@ -41,7 +41,7 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

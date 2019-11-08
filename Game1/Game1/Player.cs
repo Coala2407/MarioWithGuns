@@ -56,7 +56,7 @@ namespace Game1
             {
                 //Replace postion == 300 with isOnGround method?
                 //Starts jump timer to allow jumps
-                if ((!wasJumping && position.Y == 300) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
@@ -101,7 +101,6 @@ namespace Game1
             //Replace with an isOnGround method?
             else
             {
-                //position.Y = 300;
                 timeFalling = 0f;
             }
 
@@ -117,7 +116,6 @@ namespace Game1
 
             //Reset jumps
             isJumping = false;
-            isOnGround = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -169,11 +167,14 @@ namespace Game1
         {
             if (otherEntity.GetType().Name == "Platform")
             {
-                if (otherEntity.Position.Y < position.Y + sprite.Height)
+                if (GetCollisionBox.Bottom >= otherEntity.GetCollisionBox.Top && GetCollisionBox.Bottom < otherEntity.GetCollisionBox.Bottom)
                 {
-                    //velocity.Y = 0;
-                    position.Y = otherEntity.Position.Y - sprite.Height - 100;
+                    velocity.Y = 0;
                     isOnGround = true;
+                }
+                else
+                {
+                    isOnGround = false;
                 }
             }
         }
@@ -193,6 +194,18 @@ namespace Game1
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+        }
+
+        public override void CheckCollision(Entity otherEntity)
+        {
+            if (GetCollisionBox.Intersects(otherEntity.GetCollisionBox))
+            {
+                OnCollision(otherEntity);
+            }
+            else
+            {
+                isOnGround = false;
+            }
         }
     }
 }
