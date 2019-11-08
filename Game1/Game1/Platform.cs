@@ -15,11 +15,15 @@ namespace Game1
         /// Width of the platform (field of class Platform)
         /// </summary>
         private int width;
+        private int height;
+        Rectangle destinaiton;
 
         public Platform()
         {
-            width = 1000;
+            width = 100;
+            height = 18;
             position = new Vector2(300, 300);
+            destinaiton = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
         public override void LoadContent(ContentManager content)
@@ -27,9 +31,9 @@ namespace Game1
             sprite = content.Load<Texture2D>("whitepixel");
         }
 
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
-            throw new NotImplementedException();
+ 
         }
 
         public override void Die()
@@ -44,8 +48,15 @@ namespace Game1
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle test = new Rectangle((int)position.X, (int)position.Y, width, 50);
-            spriteBatch.Draw(sprite, test, null, Color.Red, 0, origin, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(sprite, position, destinaiton, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+        }
+
+        public override Rectangle GetCollisionBox
+        {
+            get
+            {
+                return destinaiton;
+            }
         }
     }
 }

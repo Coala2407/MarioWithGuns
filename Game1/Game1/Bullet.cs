@@ -85,16 +85,16 @@ namespace Game1
         {
             speed = 500;
 
-            
 
-            Crosshair.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;       
+
+            Crosshair.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
         /// in the gameworld..
         /// </summary>
         /// <param name="other"></param>
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
 
         }
@@ -118,7 +118,7 @@ namespace Game1
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+
             //HUSK AT KOORDINATSYSTEMET ER PÅ HOVEDET!
             //float newAngle = 0;
             float slope = 0;
@@ -136,19 +136,7 @@ namespace Game1
             slope = (float)slopeV;
             //newAngle = (float)angleDegrees;
             
-            
-
-            
-
-
-
-
-
-
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
         }
     }
 }
-
-
-

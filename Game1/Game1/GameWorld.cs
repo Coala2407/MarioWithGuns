@@ -11,9 +11,12 @@ namespace Game1
     /// </summary>
     public class GameWorld : Game
     {
+
+        public const int Width = 1920;
+        public const int Height = 1080;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
@@ -60,10 +63,16 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
+
             // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
+            graphics.ApplyChanges();
+
             EntityList.Add(new Player());
             EntityList.Add(new Platform());
             GameObjectList.Add(new Crosshair());
+            
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
@@ -126,8 +135,12 @@ namespace Game1
             foreach (Entity en in EntityList)
             {
                 en.Update(gameTime);
+                foreach (Entity other in EntityList)
+                {
+                    en.CheckCollision(other);
+                }
             }
-
+            
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -140,7 +153,6 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {

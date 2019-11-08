@@ -31,7 +31,7 @@ namespace Game1
         /// Runs on collision with another entity
         /// </summary>
         /// <param name="otherEntity"></param>
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
             throw new NotImplementedException();
         }
@@ -41,7 +41,7 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

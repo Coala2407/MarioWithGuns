@@ -21,6 +21,7 @@ namespace Game1
         /// Sets the strength of gravity for the player (field of class Player, type: int)
         /// </summary>
         private float gravity;
+        private float timeFalling;
 
         /// <summary>
         /// Set to true when the player holds down the jump key
@@ -31,15 +32,14 @@ namespace Game1
         /// </summary>
         private bool wasJumping;
 
-        private bool IsOnGround;
-        float elapsed;
+        private bool isOnGround;
 
         //Player position
         public static Vector2 PlayerPosition;
 
         public Player()
         {
-            position = new Vector2(500, 300);
+            position = new Vector2(300, 100);
             gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.0F;
@@ -56,7 +56,7 @@ namespace Game1
             {
                 //Replace postion == 300 with isOnGround method?
                 //Starts jump timer to allow jumps
-                if ((!wasJumping && position.Y == 300) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
@@ -85,28 +85,34 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
-            elapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            Vector2 prevPos = position;
 
             //Get inputs
             HandleInput(gameTime);
 
-            //Temp gravity, replace with an isOnGround method?
-            if (position.Y < 300)
+            //Gravity
+            if (!isOnGround)
             {
-                //Acceleration?
-                velocity.Y += gravity * elapsed;
+                //Acceleration
+                velocity.Y += (gravity * timeFalling);
             }
+            //Replace with an isOnGround method?
             else
             {
-                position.Y = 300;
-                elapsed = 0f;
+                timeFalling = 0f;
             }
+
+
 
             //Update y velocity value for potential jumps
             velocity.Y = Jump(velocity.Y, gameTime);
 
             //Move
             Move(gameTime);
+
+
 
             //Reset jumps
             isJumping = false;
@@ -142,7 +148,7 @@ namespace Game1
                 isJumping = true;
             }
 
-          
+
         }
 
         /// <summary>
@@ -150,8 +156,6 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-
-
             throw new NotImplementedException();
         }
 
@@ -159,9 +163,20 @@ namespace Game1
         /// Runs on collision with another entity
         /// </summary>
         /// <param name="otherEntity"></param>
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
-            throw new NotImplementedException();
+            if (otherEntity.GetType().Name == "Platform")
+            {
+                if (GetCollisionBox.Bottom >= otherEntity.GetCollisionBox.Top && GetCollisionBox.Bottom < otherEntity.GetCollisionBox.Bottom)
+                {
+                    velocity.Y = 0;
+                    isOnGround = true;
+                }
+                else
+                {
+                    isOnGround = false;
+                }
+            }
         }
 
         /// <summary>
@@ -173,12 +188,24 @@ namespace Game1
         }
 
         /// <summary>
-        /// Like content, like sprites, for the player
+        /// Load content, like sprites, for the player
         /// </summary>
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+        }
+
+        public override void CheckCollision(Entity otherEntity)
+        {
+            if (GetCollisionBox.Intersects(otherEntity.GetCollisionBox))
+            {
+                OnCollision(otherEntity);
+            }
+            else
+            {
+                isOnGround = false;
+            }
         }
     }
 }
