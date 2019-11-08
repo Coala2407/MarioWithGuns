@@ -90,7 +90,7 @@ namespace Game1
         /// in the gameworld..
         /// </summary>
         /// <param name="other"></param>
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
 
         }

@@ -31,9 +31,9 @@ namespace Game1
             sprite = content.Load<Texture2D>("whitepixel");
         }
 
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
-            throw new NotImplementedException();
+ 
         }
 
         public override void Die()

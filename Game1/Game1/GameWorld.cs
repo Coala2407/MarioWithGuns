@@ -18,9 +18,6 @@ namespace Game1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Level level { get; set; }
-        public Camera camera { get; set; }
-
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
         public static List<Entity> EntityList = new List<Entity>();
@@ -66,8 +63,7 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
-            level = new Level(this);
-            camera = new Camera(level);
+
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
@@ -76,8 +72,6 @@ namespace Game1
             EntityList.Add(new Player());
             EntityList.Add(new Platform());
             GameObjectList.Add(new Crosshair());
-            GameObjectList.Add(level);
-            GameObjectList.Add(camera);
             
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
@@ -141,6 +135,10 @@ namespace Game1
             foreach (Entity en in EntityList)
             {
                 en.Update(gameTime);
+                foreach (Entity other in EntityList)
+                {
+                    en.CheckCollision(other);
+                }
             }
             
             // TODO: Add your update logic here
@@ -154,11 +152,7 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Camera K = new Camera(new Level());
-            spriteBatch.Begin(SpriteSortMode.Deferred,null,null,null,null,null,K.GetMatrix());
-
-            Level J = new Level();
-            J.Draw(spriteBatch);
+            spriteBatch.Begin();
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {

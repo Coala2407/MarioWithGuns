@@ -32,14 +32,14 @@ namespace Game1
         /// </summary>
         private bool wasJumping;
 
-        private bool IsOnGround;
+        private bool isOnGround;
 
         //Player position
         public static Vector2 PlayerPosition;
 
         public Player()
         {
-            position = new Vector2(500, 300);
+            position = new Vector2(300, 100);
             gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.0F;
@@ -87,11 +87,13 @@ namespace Game1
         {
             timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            Vector2 prevPos = position;
+
             //Get inputs
             HandleInput(gameTime);
 
             //Gravity
-            if (position.Y < 300)
+            if (!isOnGround)
             {
                 //Acceleration
                 velocity.Y += (gravity * timeFalling);
@@ -99,9 +101,11 @@ namespace Game1
             //Replace with an isOnGround method?
             else
             {
-                position.Y = 300;
+                //position.Y = 300;
                 timeFalling = 0f;
             }
+
+
 
             //Update y velocity value for potential jumps
             velocity.Y = Jump(velocity.Y, gameTime);
@@ -109,8 +113,11 @@ namespace Game1
             //Move
             Move(gameTime);
 
+
+
             //Reset jumps
             isJumping = false;
+            isOnGround = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -151,8 +158,6 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-
-
             throw new NotImplementedException();
         }
 
@@ -160,9 +165,17 @@ namespace Game1
         /// Runs on collision with another entity
         /// </summary>
         /// <param name="otherEntity"></param>
-        public override void OnCollision(GameObject otherEntity)
+        public override void OnCollision(Entity otherEntity)
         {
-            throw new NotImplementedException();
+            if (otherEntity.GetType().Name == "Platform")
+            {
+                if (otherEntity.Position.Y < position.Y + sprite.Height)
+                {
+                    //velocity.Y = 0;
+                    position.Y = otherEntity.Position.Y - sprite.Height - 100;
+                    isOnGround = true;
+                }
+            }
         }
 
         /// <summary>
@@ -174,7 +187,7 @@ namespace Game1
         }
 
         /// <summary>
-        /// Like content, like sprites, for the player
+        /// Load content, like sprites, for the player
         /// </summary>
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)

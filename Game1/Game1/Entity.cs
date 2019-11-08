@@ -16,6 +16,11 @@ namespace Game1
         protected float shootCooldown;
         protected int health;
 
+        public Vector2 Position
+        {
+            get { return position; }
+        }
+
         public Entity()
         {
             health = 100;
@@ -38,7 +43,7 @@ namespace Game1
         /// <summary>
         /// Runs on collision with another entity
         /// </summary>
-        public abstract void OnCollision(GameObject otherEntity);
+        public abstract void OnCollision(Entity otherEntity);
 
         /// <summary>
         /// Removes entity
@@ -69,8 +74,13 @@ namespace Game1
         }
 
         //Checks for collision with another entity
-        public void CheckCollision(Entity otherEntity)
-        {}
+        public virtual void CheckCollision(Entity otherEntity)
+        {
+            if (GetCollisionBox.Intersects(otherEntity.GetCollisionBox))
+            {
+                OnCollision(otherEntity);
+            }
+        }
 
         /// <summary>
         /// Updates the health of the entity
