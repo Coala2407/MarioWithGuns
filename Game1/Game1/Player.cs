@@ -21,6 +21,7 @@ namespace Game1
         /// Sets the strength of gravity for the player (field of class Player, type: int)
         /// </summary>
         private float gravity;
+        private float timeFalling;
 
         /// <summary>
         /// Set to true when the player holds down the jump key
@@ -32,7 +33,6 @@ namespace Game1
         private bool wasJumping;
 
         private bool IsOnGround;
-        float elapsed;
 
         //Player position
         public static Vector2 PlayerPosition;
@@ -85,21 +85,22 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
-            elapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Get inputs
             HandleInput(gameTime);
 
-            //Temp gravity, replace with an isOnGround method?
+            //Gravity
             if (position.Y < 300)
             {
-                //Acceleration?
-                velocity.Y += gravity * elapsed;
+                //Acceleration
+                velocity.Y += (gravity * timeFalling);
             }
+            //Replace with an isOnGround method?
             else
             {
                 position.Y = 300;
-                elapsed = 0f;
+                timeFalling = 0f;
             }
 
             //Update y velocity value for potential jumps
