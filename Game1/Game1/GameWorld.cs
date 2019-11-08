@@ -11,9 +11,15 @@ namespace Game1
     /// </summary>
     public class GameWorld : Game
     {
+
+        public const int Width = 1920;
+        public const int Height = 1080;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public Level level { get; set; }
+        public Camera camera { get; set; }
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
@@ -60,10 +66,19 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
+            level = new Level(this);
+            camera = new Camera(level);
             // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
+            graphics.ApplyChanges();
+
             EntityList.Add(new Player());
             EntityList.Add(new Platform());
             GameObjectList.Add(new Crosshair());
+            GameObjectList.Add(level);
+            GameObjectList.Add(camera);
+            
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
@@ -127,7 +142,7 @@ namespace Game1
             {
                 en.Update(gameTime);
             }
-
+            
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -139,8 +154,11 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            Camera K = new Camera(new Level());
+            spriteBatch.Begin(SpriteSortMode.Deferred,null,null,null,null,null,K.GetMatrix());
 
+            Level J = new Level();
+            J.Draw(spriteBatch);
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {

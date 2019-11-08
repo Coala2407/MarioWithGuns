@@ -35,5 +35,16 @@ namespace Game1
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
 
+        private void HandleInput(GameTime gameTime)
+        {
+            MouseState state = Mouse.GetState();
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                position = new Vector2(state.X, state.Y);
+            }
+        }
+
+
     }
 }
