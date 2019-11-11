@@ -12,6 +12,7 @@ namespace Game1
 {
     class Crosshair : GameObject
     {
+        public static Vector2 currentPosition;
         public Crosshair()
         {
             drawLayer = 0.50f;
@@ -27,7 +28,7 @@ namespace Game1
             //Updates the current position of the mouse
             MouseState currentMouseState = Mouse.GetState();
             position = new Vector2(currentMouseState.X, currentMouseState.Y);
-
+            currentPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

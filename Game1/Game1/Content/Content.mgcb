@@ -107,7 +107,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Laser.png;Bullet.png
+/build:Laser.png
 
 #begin pixel.png
 /importer:TextureImporter
