@@ -18,7 +18,6 @@ namespace Game1
         private float movementSpeed = 500;
         private string spriteName;
         private string[] spriteNames;
-        private Vector2 velocity;
         public BackGround(string spriteName)
         {
             this.spriteName = spriteName;

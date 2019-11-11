@@ -37,8 +37,9 @@ namespace Game1
         /// <param name="spriteBatch">Access spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(sprite, position, null, Color.White, newRotation, origin, 1, SpriteEffects.None, drawLayer);
         }
+
 
         public virtual void Draw(SpriteBatch spriteBatch, bool flipped)
         {
