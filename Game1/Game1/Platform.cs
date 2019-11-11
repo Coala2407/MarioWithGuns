@@ -32,9 +32,7 @@ namespace Game1
         }
 
         public override void OnCollision(Entity otherEntity)
-        {
- 
-        }
+        {}
 
         public override void Die()
         {

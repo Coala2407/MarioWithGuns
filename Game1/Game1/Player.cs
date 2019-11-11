@@ -172,10 +172,11 @@ namespace Game1
                 {
                     velocity.Y = 0;
                     isOnGround = true;
+                    timeFalling = 0f;
 
-                    if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 20)
+                    if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 1)
                     {
-                        position.Y = otherEntity.GetCollisionBox.Top - sprite.Height + 1;
+                        position.Y = otherEntity.GetCollisionBox.Top - sprite.Height;
                     }
                 }
                 else
@@ -211,7 +212,8 @@ namespace Game1
             }
             else
             {
-                isOnGround = false;
+                //Broken atm.
+                //isOnGround = false;
             }
         }
     }

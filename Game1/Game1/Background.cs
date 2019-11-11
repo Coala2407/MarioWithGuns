@@ -18,21 +18,18 @@ namespace Game1
         private float movementSpeed = 500;
         private string spriteName;
         private string[] spriteNames;
-        private Vector2 velocity;
+
         public BackGround(string spriteName)
         {
             this.spriteName = spriteName;
         }
+
         public BackGround(Texture2D sprite, float movementSpeed)
         {
             this.sprite = sprite;
             this.movementSpeed = movementSpeed;
 
         }
-
-
-
-
 
         public override void Update(GameTime gameTime)
         {
