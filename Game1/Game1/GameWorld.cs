@@ -99,17 +99,19 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = Width;
-            graphics.PreferredBackBufferHeight = Height;
+            
             graphics.ApplyChanges();
 
             EntityList.Add(new Player());
             EntityList.Add(new Platform(new Vector2(0, 700), 1920, 100));
             GameObjectList.Add(new Crosshair());
             GameObjectList.Add(new BackGround("download"));
+            GameObjectList.Add(new BackGround("119", 300));
 
             base.Initialize();
         }
