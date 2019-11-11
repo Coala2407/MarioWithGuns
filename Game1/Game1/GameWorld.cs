@@ -111,6 +111,7 @@ namespace Game1
             EntityList.Add(new Platform(new Vector2(0, 600), 500, 50));
             GameObjectList.Add(new Crosshair());
             GameObjectList.Add(new BackGround("download"));
+            GameObjectList.Add(new BackGround("119", 300));
 
             base.Initialize();
         }

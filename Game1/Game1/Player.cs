@@ -150,6 +150,13 @@ namespace Game1
                 //Jump
                 isJumping = true;
             }
+            MouseState state = Mouse.GetState();
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                Shoot();
+            }
+
         }
 
         /// <summary>
@@ -157,7 +164,7 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            throw new NotImplementedException();
+            GameWorld.Instantiate(new Bullet(bulletSprite, position));
         }
 
         /// <summary>
@@ -201,6 +208,7 @@ namespace Game1
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+            bulletSprite = content.Load<Texture2D>("Laser");
 
         }
 
