@@ -160,7 +160,6 @@ namespace Game1
                 CrosshairPosition = position;
                 GameWorld.Instantiate(new Bullet(bulletSprite, position));
             }
-
         }
 
         /// <summary>
