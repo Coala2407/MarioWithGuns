@@ -15,10 +15,23 @@ namespace Game1
         private Vector2 velocity;
         public float speed = 500;
 
-        public BackGround()
+        private float movementSpeed = 500;
+        private string spriteName;
+        private string[] spriteNames;
+        private Vector2 velocity;
+        public BackGround(string spriteName)
         {
+            this.spriteName = spriteName;
+        }
+        public BackGround(Texture2D sprite, float movementSpeed)
+        {
+            this.sprite = sprite;
+            this.movementSpeed = movementSpeed;
 
         }
+
+
+
 
 
         public override void Update(GameTime gameTime)
@@ -29,11 +42,7 @@ namespace Game1
         }
         public override void LoadContent(ContentManager content)
         {
-
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
+            sprite = content.Load<Texture2D>(spriteName);
         }
         public void HandleInput()
         {
