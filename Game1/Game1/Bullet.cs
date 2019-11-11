@@ -14,7 +14,12 @@ namespace Game1
     {
         private Vector2 targetCoords;
         private float speed;
+        private bool canShoot = true;
+        private float shootDelay = 250;
+        private float timeElapsed;
+
         private Vector2 movement = Player.CrosshairPosition - Player.PlayerPosition;
+
 
         public Bullet(Texture2D sprite, Vector2 position)
         {
@@ -65,6 +70,7 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            /*
             speed = 5;
 
             float slope = 0;
@@ -79,9 +85,16 @@ namespace Game1
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
-
+            */
+            if (movement != Vector2.Zero)
+            {
+                movement.Normalize();
+            }
 
             Player.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            //position.X = position.X + 2;
+
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
@@ -95,12 +108,47 @@ namespace Game1
 
         public override void Shoot()
         {
-            /*
-            movement = Crosshair.CrosshairPosition - Player.PlayerPosition;
-            */
-            if (movement != Vector2.Zero)
+                GameWorld.Instantiate(new Bullet(sprite, Player.PlayerPosition));
+                /*
+                while (canShoot == true)
+                {
+                    //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
+                    position.X = position.X + 2;
+                    //position.Y = position.Y - 3;
+                    //targetCoords = movement;
+
+                }
+                canShoot = false;
+                */
+            
+
+
+        }
+
+        public void ShootTimer(GameTime gameTime)
+        {
+
+            timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (shootDelay <= timeElapsed)
             {
-                movement.Normalize();
+                canShoot = true;
+                timeElapsed = 0;
+            }
+            else
+            {
+                canShoot = false;
+            }
+        }
+
+        private void HandleInput(GameTime gameTime)
+        {
+            MouseState state = Mouse.GetState();
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                canShoot = true;
+                Shoot();
             }
         }
 

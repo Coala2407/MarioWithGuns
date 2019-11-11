@@ -143,24 +143,13 @@ namespace Game1
             if (keyState.IsKeyDown(Keys.A))
             {
                 velocity.X -= 1;
+
             }
             if (keyState.IsKeyDown(Keys.W))
             {
                 //Jump
                 isJumping = true;
             }
-
-            MouseState state = Mouse.GetState();
-
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
-                position.X = position.X + 3;
-                position.Y = position.Y + 3;
-                CrosshairPosition = position;
-                GameWorld.Instantiate(new Bullet(bulletSprite, position));
-            }
-
         }
 
         /// <summary>
@@ -183,6 +172,11 @@ namespace Game1
                 {
                     velocity.Y = 0;
                     isOnGround = true;
+
+                    if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 20)
+                    {
+                        position.Y = otherEntity.GetCollisionBox.Top - sprite.Height + 1;
+                    }
                 }
                 else
                 {
@@ -206,6 +200,7 @@ namespace Game1
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+
         }
 
         public override void CheckCollision(Entity otherEntity)
