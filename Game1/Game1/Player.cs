@@ -141,6 +141,7 @@ namespace Game1
             if (keyState.IsKeyDown(Keys.A))
             {
                 velocity.X -= 1;
+
             }
             if (keyState.IsKeyDown(Keys.W))
             {
@@ -171,6 +172,11 @@ namespace Game1
                 {
                     velocity.Y = 0;
                     isOnGround = true;
+
+                    if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 20)
+                    {
+                        position.Y = otherEntity.GetCollisionBox.Top - sprite.Height + 1;
+                    }
                 }
                 else
                 {
@@ -194,6 +200,7 @@ namespace Game1
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+
         }
 
         public override void CheckCollision(Entity otherEntity)

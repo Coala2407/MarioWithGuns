@@ -100,5 +100,17 @@ namespace Game1
 
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
+
+        public virtual void Draw(SpriteBatch spriteBatch, bool flipped)
+        {
+            if (flipped)
+            {
+                spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.FlipHorizontally, drawLayer);
+            }
+            else
+            {
+                spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+            }
+        }
     }
 }

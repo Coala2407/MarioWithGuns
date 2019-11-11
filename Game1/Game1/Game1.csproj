@@ -104,6 +104,7 @@
     <Content Include="Content\Cray.png" />
     <Content Include="Content\KaliKula.png" />
     <Content Include="Content\Laser.png" />
+    <Content Include="Content\pixel.png" />
     <Content Include="Content\whitepixel.png" />
     <Content Include="Icon.ico" />
     <Content Include="obj\x86\Debug\Game1.csproj.FileListAbsolute.txt" />
