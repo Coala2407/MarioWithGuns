@@ -17,14 +17,11 @@ namespace Game1
         private bool canShoot = true;
         private float shootDelay = 250;
         private float timeElapsed;
-        private Vector2 newpos;
         private int xPlayer = (int)Player.PlayerPosition.X;
         private int yPlayer = (int)Player.PlayerPosition.Y;
         int xCrosshair = (int)Crosshair.currentPosition.X;
         int yCrosshair = (int)Crosshair.currentPosition.Y;
-
-        //private Vector2 movement = Player.CrosshairPosition - Player.PlayerPosition;
-
+        private Vector2 movement = Crosshair.currentPosition - Player.PlayerPosition;
 
         public Bullet(Texture2D sprite, Vector2 position)
         {
@@ -71,7 +68,6 @@ namespace Game1
             sprite = content.Load<Texture2D>("Laser");
         }
 
-
         public override void Update(GameTime gameTime)
         {
             speed = 20;
@@ -79,20 +75,16 @@ namespace Game1
             double slopeV;
             double angleRadians;
 
-            
-
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             newRotation = (float)angleRadians;
             slope = (float)slopeV;
 
-            /*
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
             
-            Player.PlayerPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            */
+            //Bullet.position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
