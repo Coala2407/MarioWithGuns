@@ -70,6 +70,7 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            /*
             speed = 5;
 
             float slope = 0;
@@ -84,13 +85,16 @@ namespace Game1
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
-
+            */
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
 
             Player.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            //position.X = position.X + 2;
+
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
@@ -104,9 +108,7 @@ namespace Game1
 
         public override void Shoot()
         {
-            if (canShoot == true)
-            {
-                GameWorld.Instantiate(new Bullet(sprite, position));
+                GameWorld.Instantiate(new Bullet(sprite, Player.PlayerPosition));
                 /*
                 while (canShoot == true)
                 {
@@ -118,7 +120,7 @@ namespace Game1
                 }
                 canShoot = false;
                 */
-            }
+            
 
 
         }
