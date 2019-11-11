@@ -17,6 +17,7 @@ namespace Game1
         private bool canShoot = true;
         private float shootDelay = 250;
         private float timeElapsed;
+        private Vector2 newpos;
 
         private Vector2 movement = Player.CrosshairPosition - Player.PlayerPosition;
 
@@ -70,9 +71,13 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
-            /*
-            speed = 5;
+            HandleInput(gameTime);
+            newpos.X = 500;
+            newpos.Y = 500;
+            speed = 20;
+            
 
+            /*
             float slope = 0;
             double slopeV;
             double angleRadians;
@@ -85,15 +90,18 @@ namespace Game1
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             float angleRadiansF = (float)angleRadians;
             slope = (float)slopeV;
-            */
+            
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
-
-            Player.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             
+            Player.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            */
+
             //position.X = position.X + 2;
+
+
 
         }
         /// <summary>
@@ -108,7 +116,10 @@ namespace Game1
 
         public override void Shoot()
         {
-                GameWorld.Instantiate(new Bullet(sprite, Player.PlayerPosition));
+
+            
+
+                
                 /*
                 while (canShoot == true)
                 {
@@ -143,13 +154,7 @@ namespace Game1
 
         private void HandleInput(GameTime gameTime)
         {
-            MouseState state = Mouse.GetState();
-
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                canShoot = true;
-                Shoot();
-            }
+            
         }
 
         public override void Die()
@@ -158,9 +163,9 @@ namespace Game1
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {          
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
-        }
+        //public override void Draw(SpriteBatch spriteBatch)
+        //{          
+        //    spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
+        //}
     }
 }
