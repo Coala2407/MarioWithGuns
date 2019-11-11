@@ -71,6 +71,7 @@ namespace Game1
             EntityList.Add(new Player());
             EntityList.Add(new Platform());
             GameObjectList.Add(new Crosshair());
+            GameObjectList.Add(new BackGround("download"));
             
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
