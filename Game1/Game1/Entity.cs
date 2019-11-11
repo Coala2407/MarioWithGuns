@@ -90,7 +90,5 @@ namespace Game1
         {
             return health;
         }
-
-
     }
 }

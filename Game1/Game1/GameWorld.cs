@@ -72,7 +72,6 @@ namespace Game1
             EntityList.Add(new Platform());
             GameObjectList.Add(new Crosshair());
             
-
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
         }

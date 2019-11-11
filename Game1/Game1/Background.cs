@@ -14,7 +14,6 @@ namespace Game1
     {
         private Vector2 velocity;
         public float speed = 500;
-        private Vector2 velocity;
 
         public BackGround()
         {

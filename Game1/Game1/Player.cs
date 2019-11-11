@@ -149,17 +149,6 @@ namespace Game1
                 //Jump
                 isJumping = true;
             }
-
-            MouseState state = Mouse.GetState();
-
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
-                position.X = position.X + 3;
-                position.Y = position.Y + 3;
-                CrosshairPosition = position;
-                GameWorld.Instantiate(new Bullet(bulletSprite, position));
-            }
         }
 
         /// <summary>
