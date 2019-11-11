@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace Game1
 {
@@ -111,8 +110,12 @@ namespace Game1
             EntityList.Add(new Platform(new Vector2(0, 700), 1920, 100));
             GameObjectList.Add(new Crosshair());
 
-
             base.Initialize();
+        }
+
+        public static void Instantiate(GameObject g)
+        {
+            NewGameObjectList.Add(g);
         }
 
         /// <summary>

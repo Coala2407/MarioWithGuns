@@ -22,6 +22,7 @@ namespace Game1
         /// </summary>
         private float gravity;
         private float timeFalling;
+        private Texture2D bulletSprite;
 
         /// <summary>
         /// Set to true when the player holds down the jump key
@@ -36,6 +37,7 @@ namespace Game1
 
         //Player position
         public static Vector2 PlayerPosition;
+        public static Vector2 CrosshairPosition;
 
         public Player()
         {
@@ -148,8 +150,6 @@ namespace Game1
                 //Jump
                 isJumping = true;
             }
-
-
         }
 
         /// <summary>
