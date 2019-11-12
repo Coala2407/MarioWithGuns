@@ -13,7 +13,7 @@ namespace Game1
     class Bullet : Entity
     {
         private Vector2 targetCoords;
-        private float speed;
+        private float speed = 1400;
         private bool canShoot = true;
         private float shootDelay = 250;
         private float timeElapsed;
@@ -22,11 +22,18 @@ namespace Game1
         int xCrosshair = (int)Crosshair.currentPosition.X;
         int yCrosshair = (int)Crosshair.currentPosition.Y;
         private Vector2 movement = Crosshair.currentPosition - Player.PlayerPosition;
+        //private speed = 20;
+        private float slope = 0;
+        private double slopeV;
+        private double angleRadians;
 
         public Bullet(Texture2D sprite, Vector2 position)
         {
             this.sprite = sprite;
             this.position = Player.PlayerPosition;
+            CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
+            newRotation = (float)angleRadians;
+            slope = (float)slopeV;
         }
 
         protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleRad)
@@ -70,21 +77,21 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
-            speed = 20;
-            float slope = 0;
-            double slopeV;
-            double angleRadians;
 
-            CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
-            newRotation = (float)angleRadians;
-            slope = (float)slopeV;
 
+
+
+            //position.X = position.X + 2;
+            //bulletposition.Y = slope*bulletposition.X + playerposition.Y
+            //position.Y += slope * xCrosshair + Player.PlayerPosition.Y;
+
+            
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
             
-            //Bullet.position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
