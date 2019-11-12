@@ -14,13 +14,19 @@ namespace Game1
     {
         private Vector2 targetCoords;
         private float speed;
-        private Vector2 movement = Player.CrosshairPosition - Player.PlayerPosition;
+        private bool canShoot = true;
+        private float shootDelay = 250;
+        private float timeElapsed;
+        private int xPlayer = (int)Player.PlayerPosition.X;
+        private int yPlayer = (int)Player.PlayerPosition.Y;
+        int xCrosshair = (int)Crosshair.currentPosition.X;
+        int yCrosshair = (int)Crosshair.currentPosition.Y;
+        private Vector2 movement = Crosshair.currentPosition - Player.PlayerPosition;
 
         public Bullet(Texture2D sprite, Vector2 position)
         {
             this.sprite = sprite;
             this.position = Player.PlayerPosition;
-            this.targetCoords = Player.CrosshairPosition;
         }
 
         protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleRad)
@@ -62,26 +68,23 @@ namespace Game1
             sprite = content.Load<Texture2D>("Laser");
         }
 
-
         public override void Update(GameTime gameTime)
         {
-            speed = 5;
-
+            speed = 20;
             float slope = 0;
             double slopeV;
             double angleRadians;
 
-            int xPlayer = (int)Player.PlayerPosition.X;
-            int yPlayer = (int)Player.PlayerPosition.Y;
-            int xCrosshair = (int)targetCoords.X;
-            int yCrosshair = (int)targetCoords.Y;
-
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
-            float angleRadiansF = (float)angleRadians;
+            newRotation = (float)angleRadians;
             slope = (float)slopeV;
 
-
-            Player.CrosshairPosition += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (movement != Vector2.Zero)
+            {
+                movement.Normalize();
+            }
+            
+            //Bullet.position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         /// <summary>
         /// This is where it checks to see if it collides with anything
@@ -95,12 +98,32 @@ namespace Game1
 
         public override void Shoot()
         {
-            /*
-            movement = Crosshair.CrosshairPosition - Player.PlayerPosition;
-            */
-            if (movement != Vector2.Zero)
+                /*
+                while (canShoot == true)
+                {
+                    //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
+                    position.X = position.X + 2;
+                    //position.Y = position.Y - 3;
+                    //targetCoords = movement;
+
+                }
+                canShoot = false;
+                */
+        }
+
+        public void ShootTimer(GameTime gameTime)
+        {
+
+            timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (shootDelay <= timeElapsed)
             {
-                movement.Normalize();
+                canShoot = true;
+                timeElapsed = 0;
+            }
+            else
+            {
+                canShoot = false;
             }
         }
 
@@ -110,9 +133,9 @@ namespace Game1
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {          
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
-        }
+        //public override void Draw(SpriteBatch spriteBatch)
+        //{          
+        //    spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
+        //}
     }
 }

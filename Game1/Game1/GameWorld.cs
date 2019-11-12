@@ -20,9 +20,12 @@ namespace Game1
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
         public static List<Entity> EntityList = new List<Entity>();
-        //Used to add to the other while game is running
+        //Used to add game objects and entities while game is running
         public static List<GameObject> NewGameObjectList = new List<GameObject>();
         public static List<Entity> NewEntityList = new List<Entity>();
+        //Used to remove game objects and entities while game is running
+        public static List<GameObject> RemoveGameObjectList = new List<GameObject>();
+        public static List<Entity> RemoveEntityList = new List<Entity>();
 
         //Screensize
         private static Vector2 screenSize;
@@ -46,7 +49,41 @@ namespace Game1
             spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 #endif
+        /// <summary>
+        /// Used to add new gameobjects doing runtime
+        /// </summary>
+        /// <param name="go"></param>
+        public static void AddGameObject(GameObject go)
+        {
+            NewGameObjectList.Add(go);
+        }
 
+        /// <summary>
+        /// Used to add ned entities doing runtime
+        /// </summary>
+        /// <param name="en"></param>
+        public static void AddEntity(Entity en)
+        {
+            NewEntityList.Add(en);
+        }
+
+        /// <summary>
+        /// Used to remove gameobejcts doing runtime
+        /// </summary>
+        /// <param name="go"></param>
+        public static void RemoveGameObject(GameObject go)
+        {
+            RemoveGameObjectList.Add(go);
+        }
+
+        /// <summary>
+        /// Used to remove entities doing runtime
+        /// </summary>
+        /// <param name="en"></param>
+        public static void RemoveEntity(Entity en)
+        {
+            RemoveEntityList.Add(en);
+        }
 
         public GameWorld()
         {
@@ -62,18 +99,20 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
-
-            // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
+            screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+            // TODO: Add your initialization logic here
             graphics.ApplyChanges();
 
             EntityList.Add(new Player());
-            EntityList.Add(new Platform());
+            EntityList.Add(new Platform(new Vector2(0, 700), (int)screenSize.X - 1, 50));
+            EntityList.Add(new Platform(new Vector2(0, 600), 500, 50));
             GameObjectList.Add(new Crosshair());
-            
+            GameObjectList.Add(new BackGround("download"));
+            GameObjectList.Add(new BackGround("119", 300));
 
-            screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
         }
 
@@ -139,12 +178,34 @@ namespace Game1
             foreach (Entity en in EntityList)
             {
                 en.Update(gameTime);
+
                 foreach (Entity other in EntityList)
                 {
                     en.CheckCollision(other);
                 }
             }
-            
+
+
+            //Remove gameObjects
+            foreach (GameObject go in RemoveGameObjectList)
+            {
+                GameObjectList.Remove(go);
+            }
+
+            //Remove entities
+            foreach (Entity go in RemoveEntityList)
+            {
+                EntityList.Remove(go);
+            }
+
+            //Add new gameobjects to list
+            GameObjectList.AddRange(NewGameObjectList);
+            NewGameObjectList.Clear();
+
+            //Add new entities to list
+            EntityList.AddRange(NewEntityList);
+            NewEntityList.Clear();
+
             // TODO: Add your update logic here
             base.Update(gameTime);
         }

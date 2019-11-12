@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="BackGround.cs" />
     <Compile Include="Bullet.cs" />
-    <Compile Include="Camera.cs" />
     <Compile Include="Crosshair.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
@@ -99,8 +98,11 @@
     <Content Include="bin\Windows\x86\Release\SharpDX.XInput.dll" />
     <Content Include="bin\Windows\x86\Release\SharpDX.XInput.xml" />
     <Content Include="bin\Windows\x86\Release\SharpDX.xml" />
+    <Content Include="Content\119.jpg" />
+    <Content Include="Content\Capture.PNG" />
     <Content Include="Content\Corshair.png" />
     <Content Include="Content\Cray.png" />
+    <Content Include="Content\download.jpg" />
     <Content Include="Content\KaliKula.png" />
     <Content Include="Content\Laser.png" />
     <Content Include="Content\pixel.png" />

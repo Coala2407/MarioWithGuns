@@ -16,14 +16,14 @@ namespace Game1
         /// </summary>
         private int width;
         private int height;
-        Rectangle destinaiton;
+        Rectangle destination;
 
-        public Platform()
+        public Platform(Vector2 position, int width, int height)
         {
-            width = 100;
-            height = 18;
-            position = new Vector2(300, 300);
-            destinaiton = new Rectangle((int)position.X, (int)position.Y, width, height);
+            this.width = width;
+            this.height = height;
+            this.position = position;
+            destination = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
         public override void LoadContent(ContentManager content)
@@ -32,9 +32,7 @@ namespace Game1
         }
 
         public override void OnCollision(Entity otherEntity)
-        {
- 
-        }
+        {}
 
         public override void Die()
         {
@@ -48,14 +46,14 @@ namespace Game1
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, destinaiton, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(sprite, position, destination, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
         }
 
         public override Rectangle GetCollisionBox
         {
             get
             {
-                return destinaiton;
+                return destination;
             }
         }
     }
