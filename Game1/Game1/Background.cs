@@ -14,6 +14,8 @@ namespace Game1
     {
         private Vector2 velocity;
 
+        public float speed = 500;
+
 
         private float movementSpeed = 500;
         private string spriteName;
