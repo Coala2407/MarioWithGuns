@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
     class Enemy : Entity
     {
         //No fields
+
+
+        public Enemy()
+        {}
+
+        public Enemy(Vector2 position)
+        {
+            this.position = position;
+        }
 
         /// <summary>
         /// Method for checking the ground beneath and next to
@@ -33,7 +45,6 @@ namespace Game1
         /// <param name="otherEntity"></param>
         public override void OnCollision(Entity otherEntity)
         {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -41,7 +52,12 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            
+
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            sprite = content.Load<Texture2D>("Cray");
         }
     }
 }
