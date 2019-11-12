@@ -99,6 +99,8 @@
     <Content Include="bin\Windows\x86\Release\SharpDX.XInput.xml" />
     <Content Include="bin\Windows\x86\Release\SharpDX.xml" />
     <Content Include="Content\119.jpg" />
+    <Content Include="Content\Backgroundlayer01.png" />
+    <Content Include="Content\Backgroundlayer02.png" />
     <Content Include="Content\Backgroundlayer03.png" />
     <Content Include="Content\Capture.PNG" />
     <Content Include="Content\Corshair.png" />

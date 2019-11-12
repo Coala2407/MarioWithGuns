@@ -121,8 +121,9 @@ namespace Game1
             EntityList.Add(new Enemy(new Vector2(1000, 720)));
             EntityList.Add(new Enemy(new Vector2(200, 720)));
             GameObjectList.Add(new Crosshair());
-            GameObjectList.Add(new BackGround("download"));
-            GameObjectList.Add(new BackGround("119", 300));
+            GameObjectList.Add(new BackGround("Backgroundlayer03",0));
+            //GameObjectList.Add(new BackGround("Backgroundlayer02", 50));
+            //GameObjectList.Add(new BackGround("Backgroundlayer01", 55));
 
             base.Initialize();
         }
