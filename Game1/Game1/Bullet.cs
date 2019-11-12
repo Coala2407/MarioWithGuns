@@ -76,23 +76,19 @@ namespace Game1
         }
 
         public override void Update(GameTime gameTime)
-        {
-
-
-
-
-            //position.X = position.X + 2;
-            //bulletposition.Y = slope*bulletposition.X + playerposition.Y
-            //position.Y += slope * xCrosshair + Player.PlayerPosition.Y;
-
-            
+        {            
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
-            
             position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
+            {
+            GameWorld.RemoveEntity(this);
+            }
         }
+
         /// <summary>
         /// This is where it checks to see if it collides with anything
         /// in the gameworld..

@@ -160,7 +160,7 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            GameWorld.Instantiate(new Bullet(bulletSprite, position));
+            GameWorld.AddEntity(new Bullet(bulletSprite, position));
         }
 
         /// <summary>
