@@ -15,11 +15,17 @@ namespace Game1
 
 
         public Enemy()
-        {}
+        { }
 
         public Enemy(Vector2 position)
         {
             this.position = position;
+        }
+
+        public Enemy(Texture2D sprite, Vector2 position)
+        {
+            this.position = position;
+            this.sprite = sprite;
         }
 
         /// <summary>
@@ -45,6 +51,10 @@ namespace Game1
         /// <param name="otherEntity"></param>
         public override void OnCollision(Entity otherEntity)
         {
+            if (otherEntity is Bullet)
+            {
+                Die();
+            }
         }
 
         /// <summary>
@@ -52,7 +62,7 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-
+            GameWorld.RemoveEntity(this);
         }
 
         public override void LoadContent(ContentManager content)
