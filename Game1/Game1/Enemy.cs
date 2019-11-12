@@ -11,8 +11,9 @@ namespace Game1
 {
     class Enemy : Entity
     {
-        //No fields
-
+        //Fields
+        private bool movingRight;
+        private float time;
 
         public Enemy()
         { }
@@ -28,13 +29,34 @@ namespace Game1
             this.sprite = sprite;
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Move(gameTime);
+        }
+
         /// <summary>
         /// Method for checking the ground beneath and next to
         /// an enemy so it doesn't walk off a ledge or into a wall
         /// </summary>
-        private void CalculateNextMove()
+        private void CalculateNextMove(Entity platform)
         {
+            Rectangle collisionBox = GetCollisionBox;
+            Rectangle platformCollisionBox = platform.GetCollisionBox;
+            if (GetCollisionBox.Left > platform.GetCollisionBox.Left && !movingRight)
+            {
+                velocity.X = -1;
+            }
+            else if (GetCollisionBox.Right < platform.GetCollisionBox.Right)
+            {
+                movingRight = true;
 
+                velocity.X = +1;
+            }
+            else
+            {
+                movingRight = false;
+            }
         }
 
         /// <summary>
@@ -42,7 +64,7 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>
@@ -55,14 +77,28 @@ namespace Game1
             {
                 Die();
             }
+
+            if (otherEntity is Platform)
+            {
+                CalculateNextMove(otherEntity);
+            }
+        }
+
+        public override void CheckCollision(Entity otherEntity)
+        {
+            if (GetCollisionBox.Intersects(otherEntity.GetCollisionBox))
+            {
+                OnCollision(otherEntity);
+            }
         }
 
         /// <summary>
-        /// Player dies
+        /// Enemy dies
         /// </summary>
         public override void Die()
         {
-            GameWorld.RemoveEntity(this);
+            //Random rnd = new Random();
+            //position.X = rnd.Next(0, 1840);
         }
 
         public override void LoadContent(ContentManager content)

@@ -45,7 +45,7 @@ namespace Game1
             position = new Vector2(300, 100);
             gravity = 1f;
             moveSpeed = 500;
-            drawLayer = 0.0F;
+            drawLayer = 0.9f;
             PlayerPosition = position;
         }
 
@@ -172,29 +172,33 @@ namespace Game1
         {
             if (otherEntity is Platform)
             {
+                Rectangle collisionBox = GetCollisionBox;
+                Rectangle otherCollisionBox = otherEntity.GetCollisionBox;
                 currentPlatform = otherEntity;
-                if (GetCollisionBox.Bottom >= otherEntity.GetCollisionBox.Top && /*Player's collision box bottom is below is the same height as the platform top*/
-                    GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top < 20)/*Player's collision box bottom is not too far below the platform top*/
+
+                if (collisionBox.Bottom >= otherCollisionBox.Top && /*Player's collision box bottom is below is the same height as the platform top*/
+                    (collisionBox.Bottom - otherCollisionBox.Top) < (otherCollisionBox.Height / 2))/*Player's collision box bottom is at least half way to platform top*/
                 {
                     //Player is on the ground
                     velocity.Y = 0;
                     isOnGround = true;
                     timeFalling = 0f;
 
-                    //Teleport player to the top of the platform
-                    if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 1)
+                    //Move player to the top of the platform
+                    if (collisionBox.Bottom - otherCollisionBox.Top > 1)
                     {
-                        position.Y = otherEntity.GetCollisionBox.Top - sprite.Height;
+                        position.Y -= 1;
                     }
-
                 }
                 else
                 {
                     //Player is not properly on the platform
                     isOnGround = false;
-                    //Cancel potential jump (hitting your head on a platform)
-                    jumpTime = 0.0f;
                 }
+            }
+            if (otherEntity is Enemy)
+            {
+                Die();
             }
         }
 
@@ -204,7 +208,7 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            throw new NotImplementedException();
+            
         }
 
         /// <summary>

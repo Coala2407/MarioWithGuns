@@ -15,7 +15,7 @@ namespace Game1
         public static Vector2 currentPosition;
         public Crosshair()
         {
-            drawLayer = 0.50f;
+            drawLayer = 1;
         }
 
         public override void LoadContent(ContentManager content)
