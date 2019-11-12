@@ -37,7 +37,6 @@ namespace Game1
 
         //Player position
         public static Vector2 PlayerPosition;
-        public static Vector2 CrosshairPosition;
 
         private Entity currentPlatform;
 
@@ -58,9 +57,8 @@ namespace Game1
         {
             if (isJumping)
             {
-                //Replace postion == 300 with isOnGround method?
                 //Starts jump timer to allow jumps
-                if ((/*!wasJumping &&*/ isOnGround) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
@@ -192,6 +190,9 @@ namespace Game1
                 else
                 {
                     //Player is not properly on the platform
+                    //Cancel potential jump (hitting your head on a platform)
+                    jumpTime = 0.0f;
+                    //Not on the ground
                     isOnGround = false;
                 }
             }
