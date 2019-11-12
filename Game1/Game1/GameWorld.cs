@@ -107,8 +107,19 @@ namespace Game1
             graphics.ApplyChanges();
 
             EntityList.Add(new Player());
-            EntityList.Add(new Platform(new Vector2(0, 700), (int)screenSize.X - 1, 50));
-            EntityList.Add(new Platform(new Vector2(0, 600), 500, 50));
+            //Ground
+            EntityList.Add(new Platform(new Vector2(0, 800), (int)screenSize.X - 1, 400));
+            //Platforms
+            EntityList.Add(new Platform(new Vector2(0, 550), 500, 50));
+            EntityList.Add(new Platform(new Vector2(650, 395), 200, 50));
+            EntityList.Add(new Platform(new Vector2(1100, 225), 300, 50));
+            EntityList.Add(new Platform(new Vector2(650, 650), 200, 50));
+            EntityList.Add(new Platform(new Vector2(1500, 650), 200, 50));
+            EntityList.Add(new Platform(new Vector2(1750, 475), 200, 50));
+            EntityList.Add(new Platform(new Vector2(1775, 300), 150, 50));
+            //Enemies
+            EntityList.Add(new Enemy(new Vector2(1000, 720)));
+            EntityList.Add(new Enemy(new Vector2(200, 720)));
             GameObjectList.Add(new Crosshair());
             GameObjectList.Add(new BackGround("Backgroundlayer03",0));
             //GameObjectList.Add(new BackGround("Backgroundlayer02", 50));

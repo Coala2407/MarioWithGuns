@@ -37,7 +37,8 @@ namespace Game1
 
         //Player position
         public static Vector2 PlayerPosition;
-        public static Vector2 CrosshairPosition;
+
+        private Entity currentPlatform;
 
         public Player()
         {
@@ -56,7 +57,6 @@ namespace Game1
         {
             if (isJumping)
             {
-                //Replace postion == 300 with isOnGround method?
                 //Starts jump timer to allow jumps
                 if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
@@ -66,7 +66,7 @@ namespace Game1
                 //Jump. Stay within max jump time. Jump physics below
                 if (jumpTime > 0.0f && jumpTime <= maxJumpTime)
                 {
-                    velocityY = -2f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, .33f));
+                    velocityY = -2f * (1 - (float)Math.Pow(jumpTime / maxJumpTime, .66f));
                 }
                 //Reached the top of jump.
                 else
@@ -81,6 +81,9 @@ namespace Game1
             }
 
             wasJumping = isJumping;
+
+            //Reset jumps
+            isJumping = false;
 
             return velocityY;
         }
@@ -106,18 +109,11 @@ namespace Game1
                 timeFalling = 0f;
             }
 
-
-
             //Update y velocity value for potential jumps
             velocity.Y = Jump(velocity.Y, gameTime);
 
             //Move
             Move(gameTime);
-
-
-
-            //Reset jumps
-            isJumping = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -136,16 +132,17 @@ namespace Game1
             velocity = Vector2.Zero;
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.D))
+
+            if (keyState.IsKeyDown(Keys.D) && position.X <= (GameWorld.Width - sprite.Width))
             {
                 velocity.X += 1;
             }
-            if (keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.A) && position.X >= 0)
             {
                 velocity.X -= 1;
-
             }
-            if (keyState.IsKeyDown(Keys.W))
+
+            if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.Space))
             {
                 //Jump
                 isJumping = true;
@@ -164,7 +161,7 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            GameWorld.Instantiate(new Bullet(bulletSprite, position));
+            GameWorld.AddEntity(new Bullet(bulletSprite, position));
         }
 
         /// <summary>
@@ -173,25 +170,35 @@ namespace Game1
         /// <param name="otherEntity"></param>
         public override void OnCollision(Entity otherEntity)
         {
-            if (otherEntity.GetType().Name == "Platform")
+            if (otherEntity is Platform)
             {
-                if (GetCollisionBox.Bottom >= otherEntity.GetCollisionBox.Top && GetCollisionBox.Bottom < otherEntity.GetCollisionBox.Bottom)
+                currentPlatform = otherEntity;
+                if (GetCollisionBox.Bottom >= otherEntity.GetCollisionBox.Top && /*Player's collision box bottom is below is the same height as the platform top*/
+                    GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top < 20)/*Player's collision box bottom is not too far below the platform top*/
                 {
+                    //Player is on the ground
                     velocity.Y = 0;
                     isOnGround = true;
                     timeFalling = 0f;
 
+                    //Teleport player to the top of the platform
                     if (GetCollisionBox.Bottom - otherEntity.GetCollisionBox.Top > 1)
                     {
                         position.Y = otherEntity.GetCollisionBox.Top - sprite.Height;
                     }
+
                 }
                 else
                 {
+                    //Player is not properly on the platform
+                    //Cancel potential jump (hitting your head on a platform)
+                    jumpTime = 0.0f;
+                    //Not on the ground
                     isOnGround = false;
                 }
             }
         }
+
 
         /// <summary>
         /// Player dies
@@ -218,10 +225,10 @@ namespace Game1
             {
                 OnCollision(otherEntity);
             }
-            else
+            else if (currentPlatform != null && otherEntity == currentPlatform)
             {
-                //Broken atm.
-                //isOnGround = false;
+                isOnGround = false;
+                currentPlatform = null;
             }
         }
     }

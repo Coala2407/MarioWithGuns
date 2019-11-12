@@ -12,17 +12,15 @@ namespace Game1
 {
     class Bullet : Entity
     {
-        private Vector2 targetCoords;
         private float speed = 1400;
         private bool canShoot = true;
         private float shootDelay = 250;
         private float timeElapsed;
         private int xPlayer = (int)Player.PlayerPosition.X;
         private int yPlayer = (int)Player.PlayerPosition.Y;
-        int xCrosshair = (int)Crosshair.currentPosition.X;
-        int yCrosshair = (int)Crosshair.currentPosition.Y;
+        private int xCrosshair = (int)Crosshair.currentPosition.X;
+        private int yCrosshair = (int)Crosshair.currentPosition.Y;
         private Vector2 movement = Crosshair.currentPosition - Player.PlayerPosition;
-        //private speed = 20;
         private float slope = 0;
         private double slopeV;
         private double angleRadians;
@@ -76,23 +74,19 @@ namespace Game1
         }
 
         public override void Update(GameTime gameTime)
-        {
-
-
-
-
-            //position.X = position.X + 2;
-            //bulletposition.Y = slope*bulletposition.X + playerposition.Y
-            //position.Y += slope * xCrosshair + Player.PlayerPosition.Y;
-
-            
+        {            
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
-            
             position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
+            {
+            GameWorld.RemoveEntity(this);
+            }
         }
+
         /// <summary>
         /// This is where it checks to see if it collides with anything
         /// in the gameworld..
@@ -105,19 +99,8 @@ namespace Game1
 
         public override void Shoot()
         {
-                /*
-                while (canShoot == true)
-                {
-                    //BRUG DETTE TIL BULLET OG GANG DET MED VINKLEN :DDDDDDDD
-                    position.X = position.X + 2;
-                    //position.Y = position.Y - 3;
-                    //targetCoords = movement;
-
-                }
-                canShoot = false;
-                */
         }
-
+        /*
         public void ShootTimer(GameTime gameTime)
         {
 
@@ -133,16 +116,10 @@ namespace Game1
                 canShoot = false;
             }
         }
-
+        */
         public override void Die()
         {
             throw new NotImplementedException();
         }
-
-
-        //public override void Draw(SpriteBatch spriteBatch)
-        //{          
-        //    spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 10f);
-        //}
     }
 }
