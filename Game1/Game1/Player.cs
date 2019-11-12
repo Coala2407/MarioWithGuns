@@ -58,7 +58,7 @@ namespace Game1
             if (isJumping)
             {
                 //Starts jump timer to allow jumps
-                if ((/*!wasJumping &&*/ isOnGround) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
@@ -191,9 +191,10 @@ namespace Game1
                 else
                 {
                     //Player is not properly on the platform
-                    isOnGround = false;
                     //Cancel potential jump (hitting your head on a platform)
                     jumpTime = 0.0f;
+                    //Not on the ground
+                    isOnGround = false;
                 }
             }
         }
@@ -224,7 +225,7 @@ namespace Game1
             {
                 OnCollision(otherEntity);
             }
-            else if (currentPlatform != null && otherEntity == currentPlatform)
+            else if(currentPlatform != null && otherEntity == currentPlatform)
             {
                 isOnGround = false;
                 currentPlatform = null;
