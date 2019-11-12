@@ -50,11 +50,11 @@ namespace Game1
             velocity = Vector2.Zero;
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.D))
+            if (keyState.IsKeyDown(Keys.D) && Player.PlayerPosition.X <= (GameWorld.Width - 80))
             {
                 velocity.X += 1;
             }
-            if (keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.A) && Player.PlayerPosition.X >= 0)
             {
                 velocity.X -= 1;
             }

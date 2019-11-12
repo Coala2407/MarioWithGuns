@@ -134,15 +134,16 @@ namespace Game1
             velocity = Vector2.Zero;
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.D))
+
+            if (keyState.IsKeyDown(Keys.D) && position.X <= (GameWorld.Width - sprite.Width))
             {
                 velocity.X += 1;
             }
-            if (keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.A) && position.X >= 0)
             {
                 velocity.X -= 1;
-
             }
+
             if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.Space))
             {
                 //Jump
@@ -223,7 +224,7 @@ namespace Game1
             {
                 OnCollision(otherEntity);
             }
-            else if(currentPlatform != null && otherEntity == currentPlatform)
+            else if (currentPlatform != null && otherEntity == currentPlatform)
             {
                 isOnGround = false;
                 currentPlatform = null;
