@@ -92,6 +92,9 @@ namespace Game1
             graphics = new GraphicsDeviceManager(this);
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
             graphics.IsFullScreen = true;
+#if DEBUG
+            graphics.IsFullScreen = false;
+#endif
             Content.RootDirectory = "Content";
         }
 
