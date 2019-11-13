@@ -13,9 +13,6 @@ namespace Game1
     class Bullet : Entity
     {
         private float speed = 1400;
-        private bool canShoot = true;
-        private float shootDelay = 250;
-        private float timeElapsed;
         private int xPlayer = (int)Player.PlayerPosition.X;
         private int yPlayer = (int)Player.PlayerPosition.Y;
         private int xCrosshair = (int)Crosshair.currentPosition.X;
@@ -41,7 +38,7 @@ namespace Game1
             double posY1D = (double)posY1;
             double posY2D = (double)posY2;
 
-            //Checks if coords are valid (no division by 0...)
+            //Checks if coords are valid (to avoid division by 0)
             if (posX1 != posX2 && posY1 != posY2 || (posY2 - posY1 != 0) || (posX2 - posX1) != 0)
             {
                 m = (posY2D - posY1D) / (posX2D - posX1D);
@@ -54,7 +51,7 @@ namespace Game1
             angleRad = Math.Atan(m);
             double rad = 0;
 
-            //Calculate quadrant in correlation to player point
+            //Calculate quadrant in correlation to player point & sets the angle to go directly from the player origin to the crosshair origin
             if ((posX2 > posX1 && posY2 > posY1) || (posX2 > posX1 && posY2 < posY1))
             {
                 rad = 0;
@@ -81,6 +78,7 @@ namespace Game1
             }
             position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Removes the bullets that leave the screen for better performance
             if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
             {
                 GameWorld.RemoveEntity(this);
@@ -100,23 +98,9 @@ namespace Game1
         public override void Shoot()
         {
         }
-        /*
-        public void ShootTimer(GameTime gameTime)
-        {
-
-            timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (shootDelay <= timeElapsed)
-            {
-                canShoot = true;
-                timeElapsed = 0;
-            }
-            else
-            {
-                canShoot = false;
-            }
-        }
-        */
+        
+        
+        
         public override void Die()
         {
             throw new NotImplementedException();

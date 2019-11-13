@@ -24,6 +24,10 @@ namespace Game1
         private float timeFalling;
         private Texture2D bulletSprite;
 
+        private bool canShoot = true;
+        private float shootDelay = 750f;
+        private float timeElapsed;
+
         /// <summary>
         /// Set to true when the player holds down the jump key
         /// </summary>
@@ -118,6 +122,8 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            ShootTimer(gameTime);
+
             ApplyPhysics(gameTime);
             //Update player position
             PlayerPosition = position;
@@ -161,7 +167,26 @@ namespace Game1
         /// </summary>
         public override void Shoot()
         {
-            GameWorld.AddEntity(new Bullet(bulletSprite, position));
+            if (canShoot == true)
+            {
+                timeElapsed = 0;
+                GameWorld.AddEntity(new Bullet(bulletSprite, position));
+            }
+        }
+
+        public void ShootTimer(GameTime gameTime)
+        {
+            timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (shootDelay <= timeElapsed)
+            {
+                canShoot = true;
+                
+            }
+            else
+            {
+                canShoot = false;
+            }
         }
 
         /// <summary>
