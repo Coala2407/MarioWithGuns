@@ -226,7 +226,6 @@ namespace Game1
             }
         }
 
-
         /// <summary>
         /// Player dies
         /// </summary>
