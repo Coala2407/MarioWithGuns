@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -12,13 +13,12 @@ namespace Game1
 {
     class Enemy : Entity
     {
-        //Fields
         private bool movingRight;
         private float time;
         private Entity currentPlatform;
 
         public Enemy()
-        { }
+        {}
 
         public Enemy(Vector2 position)
         {
@@ -80,9 +80,7 @@ namespace Game1
         /// Spawn bullet and shoot
         /// </summary>
         public override void Shoot()
-        {
-
-        }
+        {}
 
         /// <summary>
         /// Runs on collision with another entity
@@ -97,7 +95,6 @@ namespace Game1
                 //Enemy dies
                 Die();
             }
-
             if (otherEntity is Platform)
             {
                 currentPlatform = otherEntity;
@@ -142,8 +139,7 @@ namespace Game1
         }
 
         // Random number
-        private RNGCryptoServiceProvider Rand =
-            new RNGCryptoServiceProvider();
+        private RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
 
         // Random number between 2 values
         private int RandomInteger(int min, int max)

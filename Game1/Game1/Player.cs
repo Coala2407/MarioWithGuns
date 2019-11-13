@@ -42,6 +42,7 @@ namespace Game1
         //Player position
         public static Vector2 PlayerPosition;
 
+        //Used to check which platform the player is on
         private Entity currentPlatform;
 
         public Player()
@@ -54,7 +55,6 @@ namespace Game1
         }
 
         /// <summary>
-        /// WIP
         /// Method used to perform a jump for the player (method of class Player, no inputs or outputs)
         /// </summary>
         private float Jump(float velocityY, GameTime gameTime)
@@ -83,7 +83,6 @@ namespace Game1
             {
                 jumpTime = 0.0f;
             }
-
             wasJumping = isJumping;
 
             //Reset jumps
@@ -94,20 +93,16 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
-            timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            Vector2 prevPos = position;
-
             //Get inputs
             HandleInput(gameTime);
 
             //Gravity
             if (!isOnGround)
             {
+                timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 //Acceleration
                 velocity.Y += (gravity * timeFalling);
             }
-            //Replace with an isOnGround method?
             else
             {
                 timeFalling = 0f;
@@ -123,7 +118,6 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             ShootTimer(gameTime);
-
             ApplyPhysics(gameTime);
             //Update player position
             PlayerPosition = position;
@@ -141,10 +135,12 @@ namespace Game1
 
             if (keyState.IsKeyDown(Keys.D) && position.X <= (GameWorld.Width - sprite.Width))
             {
+                sprite = sprites[0];
                 velocity.X += 1;
             }
             if (keyState.IsKeyDown(Keys.A) && position.X >= 0)
             {
+                sprite = sprites[1];
                 velocity.X -= 1;
             }
 
@@ -163,7 +159,7 @@ namespace Game1
         }
 
         /// <summary>
-        /// Spawn bullet and shoot
+        /// Spawn bullet, shoot & start timer to limit amount of bullets
         /// </summary>
         public override void Shoot()
         {
@@ -174,6 +170,10 @@ namespace Game1
             }
         }
 
+        /// <summary>
+        /// Limits the amount of bullets the player can shoot within a small timeframe
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void ShootTimer(GameTime gameTime)
         {
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -181,7 +181,6 @@ namespace Game1
             if (shootDelay <= timeElapsed)
             {
                 canShoot = true;
-                
             }
             else
             {
@@ -234,8 +233,7 @@ namespace Game1
         public override void Die()
         {
             position.Y = 0;
-            position.X = 0;
-            timeFalling = 0;
+            timeFalling = 0.0f;
         }
 
         /// <summary>
@@ -244,9 +242,12 @@ namespace Game1
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("KaliKula");
+            sprites = new Texture2D[2];
+            sprites[0] = content.Load<Texture2D>("KaliKula");
+            sprites[1] = content.Load<Texture2D>("KaliKulaFlipped");
+            sprite = sprites[0];
+            //Loads the bullet sprite so that it is ready when we create new bullets
             bulletSprite = content.Load<Texture2D>("Laser");
-
         }
 
         public override void CheckCollision(Entity otherEntity)
