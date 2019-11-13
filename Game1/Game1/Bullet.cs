@@ -15,7 +15,7 @@ namespace Game1
         private float speed = 1400;
         private bool canShoot = true;
         private float shootDelay = 250;
-        private float timeElapsed;
+        private float timeElapsed = 10f;
         private int xPlayer = (int)Player.PlayerPosition.X;
         private int yPlayer = (int)Player.PlayerPosition.Y;
         private int xCrosshair = (int)Crosshair.currentPosition.X;
@@ -76,12 +76,15 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            //Normalizes movement of the bullet, ensuring it moves in one direction
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
+            //Gives the bullet movement
             position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Deletes the bullet the moment its hitbox collides with the edge of the screen
             if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
             {
                 GameWorld.RemoveEntity(this);
@@ -101,7 +104,7 @@ namespace Game1
         public override void Shoot()
         {
         }
-        /*
+        
         public void ShootTimer(GameTime gameTime)
         {
 
@@ -117,7 +120,7 @@ namespace Game1
                 canShoot = false;
             }
         }
-        */
+        
         public override void Die()
         {
             throw new NotImplementedException();
