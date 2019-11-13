@@ -123,10 +123,10 @@ namespace Game1
             EntityList.Add(new Enemy(new Vector2(200, 721)));
             EntityList.Add(new Enemy(new Vector2(1100, 146)));
             GameObjectList.Add(new Crosshair());
-
-            GameObjectList.Add(new BackGround("Backgroundlayer03",0));
-            GameObjectList.Add(new BackGround("Backgroundlayer02", -50));
-            GameObjectList.Add(new BackGround("Backgroundlayer01", -55));
+            //Baggrunde
+            GameObjectList.Add(new BackGround("Backgroundlayer03",0,0.1f));
+            GameObjectList.Add(new BackGround("Backgroundlayer02", -50,0.2f));
+            GameObjectList.Add(new BackGround("Backgroundlayer01", -55,0.3f));
 
 
             base.Initialize();
