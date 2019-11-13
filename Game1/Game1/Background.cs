@@ -26,10 +26,11 @@ namespace Game1
             this.spriteName = spriteName;
         }
 
-        public BackGround(string spriteName, float movementSpeed)
+        public BackGround(string spriteName, float movementSpeed, float layer)
         {
             this.spriteName = spriteName;
             this.movementSpeed = movementSpeed;
+            this.drawLayer = layer;
         }
 
         public override void Update(GameTime gameTime)

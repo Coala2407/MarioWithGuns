@@ -54,12 +54,13 @@ namespace Game1
                 if (GetCollisionBox.Left > platform.GetCollisionBox.Left && !movingRight)
                 {
                     velocity.X = -1;
+                    sprite = sprites[0];
                 }
                 else if (GetCollisionBox.Right < platform.GetCollisionBox.Right)
                 {
                     movingRight = true;
-
                     velocity.X = +1;
+                    sprite = sprites[1];
                 }
                 else
                 {
@@ -113,7 +114,7 @@ namespace Game1
             }
             else if (currentPlatform == null)
             {
-                velocity.Y = +1;
+                velocity.Y = +10;
                 velocity.X = 0;
             }
             else if (currentPlatform != null && currentPlatform == otherEntity)
@@ -134,7 +135,10 @@ namespace Game1
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Cray");
+            sprites = new Texture2D[2];
+            sprites[0] = content.Load<Texture2D>("Cray");
+            sprites[1] = content.Load<Texture2D>("CrayFlipped");
+            sprite = sprites[0];
         }
 
         // Random number
