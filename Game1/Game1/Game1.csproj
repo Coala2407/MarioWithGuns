@@ -105,6 +105,7 @@
     <Content Include="Content\Capture.PNG" />
     <Content Include="Content\Corshair.png" />
     <Content Include="Content\Cray.png" />
+    <Content Include="Content\CrayFlipped.png" />
     <Content Include="Content\download.jpg" />
     <Content Include="Content\KaliKula.png" />
     <Content Include="Content\Laser.png" />
