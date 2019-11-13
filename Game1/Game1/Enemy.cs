@@ -17,9 +17,6 @@ namespace Game1
         private float time;
         private Entity currentPlatform;
 
-        public Enemy()
-        {}
-
         public Enemy(Vector2 position)
         {
             this.position = position;
