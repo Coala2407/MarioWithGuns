@@ -119,12 +119,15 @@ namespace Game1
             EntityList.Add(new Platform(new Vector2(1750, 475), 200, 50));
             EntityList.Add(new Platform(new Vector2(1775, 300), 150, 50));
             //Enemies
-            EntityList.Add(new Enemy(new Vector2(1000, 720)));
-            EntityList.Add(new Enemy(new Vector2(200, 720)));
+            EntityList.Add(new Enemy(new Vector2(1000, 721)));
+            EntityList.Add(new Enemy(new Vector2(200, 721)));
+            EntityList.Add(new Enemy(new Vector2(1100, 146)));
             GameObjectList.Add(new Crosshair());
+
             GameObjectList.Add(new BackGround("Backgroundlayer03",0));
             GameObjectList.Add(new BackGround("Backgroundlayer02", -50));
             GameObjectList.Add(new BackGround("Backgroundlayer01", -55));
+
 
             base.Initialize();
         }
@@ -230,7 +233,7 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
             //Draw all gameobjects on the list
             foreach (GameObject go in GameObjectList)
             {

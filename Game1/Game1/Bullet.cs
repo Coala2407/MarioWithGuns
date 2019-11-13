@@ -74,7 +74,7 @@ namespace Game1
         }
 
         public override void Update(GameTime gameTime)
-        {            
+        {
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
@@ -83,7 +83,7 @@ namespace Game1
 
             if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
             {
-            GameWorld.RemoveEntity(this);
+                GameWorld.RemoveEntity(this);
             }
         }
 
