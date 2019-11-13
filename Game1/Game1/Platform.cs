@@ -36,19 +36,10 @@ namespace Game1
         {}
 
         public override void Die()
-        {
-            throw new NotImplementedException();
-        }
+        {}
 
         public override void Shoot()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sprite, position, destination, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
-        }
+        {}
 
         public override Rectangle GetCollisionBox
         {

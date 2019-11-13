@@ -42,6 +42,7 @@ namespace Game1
         //Player position
         public static Vector2 PlayerPosition;
 
+        //Used to check which platform the player is on
         private Entity currentPlatform;
 
         public Player()
@@ -121,7 +122,6 @@ namespace Game1
         public override void Update(GameTime gameTime)
         {
             ShootTimer(gameTime);
-
             ApplyPhysics(gameTime);
             //Update player position
             PlayerPosition = position;
@@ -161,7 +161,7 @@ namespace Game1
         }
 
         /// <summary>
-        /// Spawn bullet and shoot
+        /// Spawn bullet, shoot & start timer to limit amount of bullets
         /// </summary>
         public override void Shoot()
         {
@@ -172,6 +172,10 @@ namespace Game1
             }
         }
 
+        /// <summary>
+        /// Limits the amount of bullets the player can shoot within a small timeframe
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void ShootTimer(GameTime gameTime)
         {
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -231,7 +235,6 @@ namespace Game1
         public override void Die()
         {
             position.Y = 0;
-            position.X = 0;
             timeFalling = 0;
         }
 
@@ -242,6 +245,7 @@ namespace Game1
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("KaliKula");
+            //Loads the bullet sprite so that it is ready when we create new bullets
             bulletSprite = content.Load<Texture2D>("Laser");
         }
 
