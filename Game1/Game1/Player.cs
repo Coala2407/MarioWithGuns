@@ -42,7 +42,7 @@ namespace Game1
 
         public Player()
         {
-            position = new Vector2(300, 100);
+            position = new Vector2(0, 0);
             gravity = 1f;
             moveSpeed = 500;
             drawLayer = 0.9f;
@@ -58,7 +58,7 @@ namespace Game1
             if (isJumping)
             {
                 //Starts jump timer to allow jumps
-                if ((/*!wasJumping &&*/ isOnGround) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
@@ -208,7 +208,9 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            
+            position.Y = 0;
+            position.X = 0;
+            timeFalling = 0;
         }
 
         /// <summary>

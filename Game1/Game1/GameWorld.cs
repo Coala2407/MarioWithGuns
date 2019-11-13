@@ -109,7 +109,7 @@ namespace Game1
 
             EntityList.Add(new Player());
             //Ground
-            EntityList.Add(new Platform(new Vector2(0, 800), (int)screenSize.X - 1, 400));
+            EntityList.Add(new Platform(new Vector2(0, 800), (int)screenSize.X + 200 - 1, 400));
             //Platforms
             EntityList.Add(new Platform(new Vector2(0, 550), 500, 50));
             EntityList.Add(new Platform(new Vector2(650, 395), 200, 50));
@@ -119,16 +119,15 @@ namespace Game1
             EntityList.Add(new Platform(new Vector2(1750, 475), 200, 50));
             EntityList.Add(new Platform(new Vector2(1775, 300), 150, 50));
             //Enemies
-            EntityList.Add(new Enemy(new Vector2(1000, 721)));
-            EntityList.Add(new Enemy(new Vector2(200, 721)));
-            EntityList.Add(new Enemy(new Vector2(1100, 146)));
+            EntityList.Add(new Enemy(new Vector2(1000, 600)));
+            EntityList.Add(new Enemy(new Vector2(200, 800)));
+            EntityList.Add(new Enemy(new Vector2(1100, 225)));
             GameObjectList.Add(new Crosshair());
+
             //Baggrunde
             GameObjectList.Add(new BackGround("Backgroundlayer03",0,0.1f));
             GameObjectList.Add(new BackGround("Backgroundlayer02", -50,0.2f));
             GameObjectList.Add(new BackGround("Backgroundlayer01", -55,0.3f));
-
-
             base.Initialize();
         }
 
