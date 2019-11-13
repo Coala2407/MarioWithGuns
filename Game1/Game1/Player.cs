@@ -94,20 +94,16 @@ namespace Game1
 
         private void ApplyPhysics(GameTime gameTime)
         {
-            timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            Vector2 prevPos = position;
-
             //Get inputs
             HandleInput(gameTime);
 
             //Gravity
             if (!isOnGround)
             {
+                timeFalling += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 //Acceleration
                 velocity.Y += (gravity * timeFalling);
             }
-            //Replace with an isOnGround method?
             else
             {
                 timeFalling = 0f;
@@ -141,10 +137,12 @@ namespace Game1
 
             if (keyState.IsKeyDown(Keys.D) && position.X <= (GameWorld.Width - sprite.Width))
             {
+                sprite = sprites[0];
                 velocity.X += 1;
             }
             if (keyState.IsKeyDown(Keys.A) && position.X >= 0)
             {
+                sprite = sprites[1];
                 velocity.X -= 1;
             }
 
@@ -181,7 +179,7 @@ namespace Game1
             if (shootDelay <= timeElapsed)
             {
                 canShoot = true;
-                
+
             }
             else
             {
@@ -235,7 +233,7 @@ namespace Game1
         {
             position.Y = 0;
             position.X = 0;
-            timeFalling = 0;
+            timeFalling = 0.0f;
         }
 
         /// <summary>
@@ -244,7 +242,11 @@ namespace Game1
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("KaliKula");
+            sprites = new Texture2D[2];
+            sprites[0] = content.Load<Texture2D>("KaliKula");
+            sprites[1] = content.Load<Texture2D>("KaliKulaFlipped");
+            sprite = sprites[0];
+
             bulletSprite = content.Load<Texture2D>("Laser");
 
         }

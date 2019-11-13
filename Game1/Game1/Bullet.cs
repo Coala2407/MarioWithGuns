@@ -96,7 +96,10 @@ namespace Game1
         /// <param name="other"></param>
         public override void OnCollision(Entity otherEntity)
         {
-
+            if (otherEntity is Platform)
+            {
+                GameWorld.RemoveEntity(this);
+            }
         }
 
         public override void Shoot()
