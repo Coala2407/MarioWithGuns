@@ -88,6 +88,7 @@ namespace Game1
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
             Content.RootDirectory = "Content";
         }
 
@@ -122,10 +123,9 @@ namespace Game1
             EntityList.Add(new Enemy(new Vector2(200, 800)));
             EntityList.Add(new Enemy(new Vector2(1100, 225)));
             GameObjectList.Add(new Crosshair());
-            //GameObjectList.Add(new BackGround("Backgroundlayer03", 0));
-            //GameObjectList.Add(new BackGround("Backgroundlayer02", 50));
-            //GameObjectList.Add(new BackGround("Backgroundlayer01", 55));
-
+            GameObjectList.Add(new BackGround("Backgroundlayer03",0));
+            GameObjectList.Add(new BackGround("Backgroundlayer02", -50));
+            GameObjectList.Add(new BackGround("Backgroundlayer01", -55));
             base.Initialize();
         }
 
