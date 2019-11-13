@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -14,6 +15,7 @@ namespace Game1
         //Fields
         private bool movingRight;
         private float time;
+        private Entity currentPlatform;
 
         public Enemy()
         { }
@@ -21,12 +23,16 @@ namespace Game1
         public Enemy(Vector2 position)
         {
             this.position = position;
+            this.position.Y -= 79; /*Adjust for sprite height, so it's the feet at this position*/
+            drawLayer = 0.7f;
         }
 
         public Enemy(Texture2D sprite, Vector2 position)
         {
             this.position = position;
+            this.position.Y -= 79; /*Adjust for sprite height, so it's the feet at this position*/
             this.sprite = sprite;
+            drawLayer = 0.7f;
         }
 
         public override void Update(GameTime gameTime)
@@ -43,19 +49,29 @@ namespace Game1
         {
             Rectangle collisionBox = GetCollisionBox;
             Rectangle platformCollisionBox = platform.GetCollisionBox;
-            if (GetCollisionBox.Left > platform.GetCollisionBox.Left && !movingRight)
+            if (currentPlatform != null)
             {
-                velocity.X = -1;
-            }
-            else if (GetCollisionBox.Right < platform.GetCollisionBox.Right)
-            {
-                movingRight = true;
+                if (GetCollisionBox.Left > platform.GetCollisionBox.Left && !movingRight)
+                {
+                    velocity.X = -1;
+                }
+                else if (GetCollisionBox.Right < platform.GetCollisionBox.Right)
+                {
+                    movingRight = true;
 
-                velocity.X = +1;
+                    velocity.X = +1;
+                }
+                else
+                {
+                    movingRight = false;
+                    velocity.X = 0;
+                }
             }
-            else
+
+            //Move enemy to the top of the platform
+            if (collisionBox.Bottom - platformCollisionBox.Top > 1)
             {
-                movingRight = false;
+                position.Y -= 1;
             }
         }
 
@@ -75,11 +91,16 @@ namespace Game1
         {
             if (otherEntity is Bullet)
             {
+                //Remvoe bullet/laser
+                GameWorld.RemoveEntity(otherEntity);
+                //Enemy dies
                 Die();
             }
 
             if (otherEntity is Platform)
             {
+                currentPlatform = otherEntity;
+                velocity.Y = 0;
                 CalculateNextMove(otherEntity);
             }
         }
@@ -90,6 +111,15 @@ namespace Game1
             {
                 OnCollision(otherEntity);
             }
+            else if (currentPlatform == null)
+            {
+                velocity.Y = +1;
+                velocity.X = 0;
+            }
+            else if (currentPlatform != null && currentPlatform == otherEntity)
+            {
+                currentPlatform = null;
+            }
         }
 
         /// <summary>
@@ -97,13 +127,34 @@ namespace Game1
         /// </summary>
         public override void Die()
         {
-            //Random rnd = new Random();
-            //position.X = rnd.Next(0, 1840);
+            //Teleport enemy to top
+            position.Y = -sprite.Height;
+            position.X = RandomInteger(0, GameWorld.Width - sprite.Width);
         }
 
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("Cray");
+        }
+
+        // Random number
+        private RNGCryptoServiceProvider Rand =
+            new RNGCryptoServiceProvider();
+
+        // Random number between 2 values
+        private int RandomInteger(int min, int max)
+        {
+            uint scale = uint.MaxValue;
+            while (scale == uint.MaxValue)
+            {
+                // Get four random bytes.
+                byte[] four_bytes = new byte[4];
+                Rand.GetBytes(four_bytes);
+
+                // Convert that into an uint.
+                scale = BitConverter.ToUInt32(four_bytes, 0);
+            }
+            return (int)(min + (max - min) * (scale / (double)uint.MaxValue));
         }
     }
 }

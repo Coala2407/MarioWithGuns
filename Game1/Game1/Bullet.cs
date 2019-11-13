@@ -32,6 +32,7 @@ namespace Game1
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             newRotation = (float)angleRadians;
             slope = (float)slopeV;
+            drawLayer = 0.8f;
         }
 
         protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleRad)
