@@ -13,13 +13,8 @@ namespace Game1
     class BackGround : GameObject
     {
         private Vector2 velocity;
-
-        public float speed = 500;
-
-
         private float movementSpeed = 500;
         private string spriteName;
-        private string[] spriteNames;
 
         public BackGround(string spriteName)
         {
@@ -37,17 +32,17 @@ namespace Game1
         {
             HandleInput();
             Move(gameTime);
-
         }
+
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
             this.position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y - sprite.Height / 2);
             this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
+
         public void HandleInput()
         {
-
             velocity = Vector2.Zero;
 
             KeyboardState keyState = Keyboard.GetState();
@@ -59,17 +54,12 @@ namespace Game1
             {
                 velocity.X -= 1;
             }
-
-
         }
+
         private void Move(GameTime gameTime)
         {
-
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             position += ((velocity * movementSpeed) * deltaTime);
-
         }
-
     }
-
 }

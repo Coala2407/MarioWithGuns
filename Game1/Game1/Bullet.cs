@@ -22,7 +22,6 @@ namespace Game1
         private double yPlayer = (double)Player.PlayerPosition.Y;
         private double xCrosshair = (double)Crosshair.currentPosition.X;
         private double yCrosshair = (double)Crosshair.currentPosition.Y;
-        
         private Vector2 movement = Crosshair.currentPosition - Player.PlayerPosition;
         
         //Value to store the slope between 2 points in

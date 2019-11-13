@@ -10,19 +10,22 @@ namespace Game1
     /// </summary>
     public class GameWorld : Game
     {
-
+        //World size
         public const int Width = 1920;
         public const int Height = 1080;
 
+        //Graphics device
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         //World fields
         public static List<GameObject> GameObjectList = new List<GameObject>();
         public static List<Entity> EntityList = new List<Entity>();
+
         //Used to add game objects and entities while game is running
         public static List<GameObject> NewGameObjectList = new List<GameObject>();
         public static List<Entity> NewEntityList = new List<Entity>();
+
         //Used to remove game objects and entities while game is running
         public static List<GameObject> RemoveGameObjectList = new List<GameObject>();
         public static List<Entity> RemoveEntityList = new List<Entity>();
@@ -31,7 +34,6 @@ namespace Game1
         private static Vector2 screenSize;
         public static Vector2 ScreenSize { get => screenSize; }
 
-        //Methods
         //Debug hitboxes
 #if DEBUG
         Texture2D collisionTexture;
@@ -100,16 +102,18 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
+            //Screen setup
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
-            // TODO: Add your initialization logic here
             graphics.ApplyChanges();
-
+            
+            //Player
             EntityList.Add(new Player());
+            
             //Ground
             EntityList.Add(new Platform(new Vector2(0, 800), (int)Width - 1, 400));
+
             //Platforms
             EntityList.Add(new Platform(new Vector2(0, 550), 500, 50));
             EntityList.Add(new Platform(new Vector2(650, 395), 200, 50));
@@ -118,6 +122,7 @@ namespace Game1
             EntityList.Add(new Platform(new Vector2(1500, 650), 200, 50));
             EntityList.Add(new Platform(new Vector2(1750, 475), 200, 50));
             EntityList.Add(new Platform(new Vector2(1775, 300), 150, 50));
+
             //Enemies
             EntityList.Add(new Enemy(new Vector2(1000, 600)));
             EntityList.Add(new Enemy(new Vector2(200, 800)));
@@ -131,12 +136,12 @@ namespace Game1
             GameObjectList.Add(new BackGround("Backgroundlayer01", -55,0.3f));
             base.Initialize();
         }
-
+        /*
         public static void Instantiate(GameObject g)
         {
             NewGameObjectList.Add(g);
         }
-
+        */
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -162,8 +167,6 @@ namespace Game1
 #if DEBUG
             collisionTexture = Content.Load<Texture2D>("whitepixel");
 #endif
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -182,25 +185,27 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //Quits the program/game when the 'Escape' button is pressed
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
+            }
 
             //Update gameobjects
             foreach (GameObject go in GameObjectList)
             {
                 go.Update(gameTime);
             }
+
             //Update entities
             foreach (Entity en in EntityList)
             {
                 en.Update(gameTime);
-
                 foreach (Entity other in EntityList)
                 {
                     en.CheckCollision(other);
                 }
             }
-
 
             //Remove gameObjects
             foreach (GameObject go in RemoveGameObjectList)
@@ -248,10 +253,7 @@ namespace Game1
                 DrawCollisionBox(en);
 #endif
             }
-            // TODO: Add your drawing code here
-
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
