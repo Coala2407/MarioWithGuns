@@ -58,7 +58,7 @@ namespace Game1
             if (isJumping)
             {
                 //Starts jump timer to allow jumps
-                if ((/*!wasJumping &&*/ isOnGround) || jumpTime > 0.0f)
+                if ((!wasJumping && isOnGround) || jumpTime > 0.0f)
                 {
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
