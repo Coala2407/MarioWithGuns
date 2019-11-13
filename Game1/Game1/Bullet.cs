@@ -13,6 +13,7 @@ namespace Game1
     class Bullet : Entity
     {
         private float speed = 1400;
+
         private int xPlayer = (int)Player.PlayerPosition.X;
         private int yPlayer = (int)Player.PlayerPosition.Y;
         private int xCrosshair = (int)Crosshair.currentPosition.X;
@@ -29,6 +30,7 @@ namespace Game1
             CalculateAngle(xPlayer, yPlayer, xCrosshair, yCrosshair, out slopeV, out angleRadians);
             newRotation = (float)angleRadians;
             slope = (float)slopeV;
+            drawLayer = 0.8f;
         }
 
         protected void CalculateAngle(int posX1, int posY1, int posX2, int posY2, out double m, out double angleRad)
@@ -72,13 +74,15 @@ namespace Game1
 
         public override void Update(GameTime gameTime)
         {
+            //Normalizes movement of the bullet, ensuring it moves in one direction
             if (movement != Vector2.Zero)
             {
                 movement.Normalize();
             }
+            //Gives the bullet movement
             position += movement * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //Removes the bullets that leave the screen for better performance
+            //Deletes the bullet the moment its hitbox collides with the edge of the screen
             if (position.Y <= 0 || position.X <= 0 || position.Y >= GameWorld.Height || position.X >= GameWorld.Width)
             {
                 GameWorld.RemoveEntity(this);
@@ -98,9 +102,8 @@ namespace Game1
         public override void Shoot()
         {
         }
-        
-        
-        
+
+
         public override void Die()
         {
             throw new NotImplementedException();
