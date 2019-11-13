@@ -107,6 +107,7 @@
     <Content Include="Content\CrayFlipped.png" />
     <Content Include="Content\download.jpg" />
     <Content Include="Content\KaliKula.png" />
+    <Content Include="Content\KaliKulaFlipped.png" />
     <Content Include="Content\Laser.png" />
     <Content Include="Content\pixel.png" />
     <Content Include="Content\whitepixel.png" />
