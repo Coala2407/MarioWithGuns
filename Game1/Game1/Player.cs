@@ -54,7 +54,6 @@ namespace Game1
         }
 
         /// <summary>
-        /// WIP
         /// Method used to perform a jump for the player (method of class Player, no inputs or outputs)
         /// </summary>
         private float Jump(float velocityY, GameTime gameTime)
@@ -83,7 +82,6 @@ namespace Game1
             {
                 jumpTime = 0.0f;
             }
-
             wasJumping = isJumping;
 
             //Reset jumps
@@ -181,7 +179,6 @@ namespace Game1
             if (shootDelay <= timeElapsed)
             {
                 canShoot = true;
-                
             }
             else
             {
@@ -246,7 +243,6 @@ namespace Game1
         {
             sprite = content.Load<Texture2D>("KaliKula");
             bulletSprite = content.Load<Texture2D>("Laser");
-
         }
 
         public override void CheckCollision(Entity otherEntity)
