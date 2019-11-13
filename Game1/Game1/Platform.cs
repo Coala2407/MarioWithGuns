@@ -24,6 +24,7 @@ namespace Game1
             this.height = height;
             this.position = position;
             destination = new Rectangle((int)position.X, (int)position.Y, width, height);
+            drawLayer = 0.1f;
         }
 
         public override void LoadContent(ContentManager content)
