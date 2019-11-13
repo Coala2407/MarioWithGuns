@@ -16,11 +16,6 @@ namespace Game1
         protected float shootCooldown;
         protected int health;
 
-        public Vector2 Position
-        {
-            get { return position; }
-        }
-
         public Entity()
         {
             health = 100;
