@@ -15,13 +15,11 @@ namespace Game1
         /// Width of the platform (field of class Platform)
         /// </summary>
         private int width;
-        private int height;
         Rectangle destination;
 
         public Platform(Vector2 position, int width, int height)
         {
             this.width = width;
-            this.height = height;
             this.position = position;
             destination = new Rectangle((int)position.X, (int)position.Y, width, height);
             
