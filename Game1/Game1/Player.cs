@@ -25,7 +25,7 @@ namespace Game1
         private Texture2D bulletSprite;
 
         private bool canShoot = true;
-        private float shootDelay = 0f;
+        private float shootDelay = 150f;
         private float timeElapsed;
 
         /// <summary>
