@@ -25,7 +25,7 @@ namespace Game1
         private Texture2D bulletSprite;
 
         private bool canShoot = true;
-        private float shootDelay = 750f;
+        private float shootDelay = 0f;
         private float timeElapsed;
 
         /// <summary>
@@ -222,6 +222,7 @@ namespace Game1
             }
             if (otherEntity is Enemy)
             {
+                GameWorld.enemiesShot = 0;
                 Die();
             }
         }
