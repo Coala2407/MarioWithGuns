@@ -87,10 +87,12 @@ namespace Game1
         {
             if (otherEntity is Bullet)
             {
-                //Remvoe bullet/laser
+                //Remove bullet/laser
                 GameWorld.RemoveEntity(otherEntity);
                 //Enemy dies
                 Die();
+                //+1 score
+                GameWorld.enemiesShot++;
             }
             if (otherEntity is Platform)
             {
