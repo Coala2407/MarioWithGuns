@@ -90,6 +90,8 @@
     <Content Include="Content\KaliKulaFlipped.png" />
     <Content Include="Content\Laser.png" />
     <Content Include="Content\pixel.png" />
+    <Content Include="Content\PlatformLawge.png" />
+    <Content Include="Content\Platformmedwum.png" />
     <Content Include="Content\Platformsmol.png" />
     <Content Include="Content\whitepixel.png" />
     <Content Include="Icon.ico" />
@@ -97,6 +99,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Standard.spritefont" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

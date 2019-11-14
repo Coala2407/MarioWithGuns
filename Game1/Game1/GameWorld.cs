@@ -22,6 +22,7 @@ namespace Game1
         public static List<GameObject> GameObjectList = new List<GameObject>();
         public static List<Entity> EntityList = new List<Entity>();
         public static int enemiesShot;
+        private SpriteFont scoreFont;
 
         //Used to add game objects and entities while game is running
         public static List<GameObject> NewGameObjectList = new List<GameObject>();
@@ -108,10 +109,10 @@ namespace Game1
             graphics.PreferredBackBufferHeight = Height;
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             graphics.ApplyChanges();
-            
+
             //Player
             EntityList.Add(new Player());
-            
+
             //Ground
             EntityList.Add(new Platform(new Vector2(0, 800), (int)Width - 1, 400));
 
@@ -132,9 +133,9 @@ namespace Game1
             GameObjectList.Add(new Crosshair());
 
             //Baggrunde
-            GameObjectList.Add(new BackGround("Backgroundlayer03",0,0.1f));
-            GameObjectList.Add(new BackGround("Backgroundlayer02", -50,0.2f));
-            GameObjectList.Add(new BackGround("Backgroundlayer01", -55,0.3f));
+            GameObjectList.Add(new BackGround("Backgroundlayer03", 0, 0.1f));
+            GameObjectList.Add(new BackGround("Backgroundlayer02", -50, 0.2f));
+            GameObjectList.Add(new BackGround("Backgroundlayer01", -55, 0.3f));
             base.Initialize();
         }
         /// <summary>
@@ -145,6 +146,8 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            //Load score font
+            scoreFont = Content.Load<SpriteFont>("Standard");
 
             //Load all from gameobjects
             foreach (GameObject go in GameObjectList)
@@ -248,6 +251,10 @@ namespace Game1
                 DrawCollisionBox(en);
 #endif
             }
+
+            //Draw score
+            spriteBatch.DrawString(scoreFont, $"Score: {enemiesShot}", new Vector2(0, 0), Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.95f);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -222,6 +222,7 @@ namespace Game1
             }
             if (otherEntity is Enemy)
             {
+                GameWorld.enemiesShot = 0;
                 Die();
             }
         }
