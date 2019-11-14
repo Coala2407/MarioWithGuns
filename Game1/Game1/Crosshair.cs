@@ -30,10 +30,5 @@ namespace Game1
             position = new Vector2(currentMouseState.X, currentMouseState.Y);
             currentPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
         }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
-        }
     }
 }
