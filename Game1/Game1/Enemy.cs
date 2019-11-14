@@ -16,6 +16,8 @@ namespace Game1
         private bool movingRight;
         private float time;
         private Entity currentPlatform;
+        // Random number
+        private RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
 
         public Enemy(Vector2 position)
         {
@@ -135,9 +137,7 @@ namespace Game1
             sprite = sprites[0];
         }
 
-        // Random number
-        private RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
-
+        
         // Random number between 2 values
         private int RandomInteger(int min, int max)
         {
