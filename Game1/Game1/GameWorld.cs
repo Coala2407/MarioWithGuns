@@ -129,6 +129,7 @@ namespace Game1
             EntityList.Add(new Enemy(new Vector2(1000, 600)));
             EntityList.Add(new Enemy(new Vector2(200, 800)));
             EntityList.Add(new Enemy(new Vector2(1100, 225)));
+            EntityList.Add(new Enemy(new Vector2(650, 400)));
             EntityList.Add(new Enemy(new Vector2(1800, 300)));
             GameObjectList.Add(new Crosshair());
 
