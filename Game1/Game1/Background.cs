@@ -16,10 +16,7 @@ namespace Game1
         private float movementSpeed = 500;
         private string spriteName;
 
-        public BackGround(string spriteName)
-        {
-            this.spriteName = spriteName;
-        }
+        
 
         public BackGround(string spriteName, float movementSpeed, float layer)
         {

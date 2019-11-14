@@ -24,12 +24,28 @@ namespace Game1
             this.height = height;
             this.position = position;
             destination = new Rectangle((int)position.X, (int)position.Y, width, height);
+            
             drawLayer = 0.5f;
         }
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("whitepixel");
+            if (width == 500)
+            {
+                sprite = content.Load<Texture2D>("PlatformLawge");
+            }
+            else if (width == 300)
+            {
+                sprite = content.Load<Texture2D>("Platformmedwum");
+            }
+            else if (width == 200)
+            {
+                sprite = content.Load<Texture2D>("Platformsmol");  
+            }
+            else
+            {
+                sprite = content.Load<Texture2D>("ixel");
+            }
         }
 
         public override void OnCollision(Entity otherEntity)
